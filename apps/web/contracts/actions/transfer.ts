@@ -4,10 +4,10 @@ declare const ContractError: new (message?: string) => any;
 
 export function transfer(state: State, action: Action): TransferResult {
   const balances = state.balances;
-  const input = action.input;
+  const input = action.input as TransferInput;
   const caller = action.caller;
-  const target = (input as TransferInput).target;
-  const qty = (input as TransferInput).qty;
+  const target = input.target;
+  const qty = input.qty;
 
   if (!Number.isInteger(qty)) {
     throw new ContractError('Invalid value for "qty". Must be an integer');
