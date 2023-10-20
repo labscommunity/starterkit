@@ -1,43 +1,71 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { ArweaveWalletKit } from "arweave-wallet-kit";
-import NavBar from "@/components/NavBar";
 import "./globals.css";
+import { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+import { siteConfig } from "@/config/site";
+import { fontSans } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+import { SiteHeader } from "@/components/site-header";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ArweaveWalletKit } from "arweave-wallet-kit";
 
 export const metadata: Metadata = {
-  title: "StarterKit",
-  description: "Create a full-stack, typesafe Arweave app",
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <ArweaveWalletKit
-        config={{
-          permissions: [
-            "ACCESS_ADDRESS",
-            "SIGN_TRANSACTION",
-            "DISPATCH",
-            "ACCESS_PUBLIC_KEY",
-            "SIGNATURE",
-          ],
-          ensurePermissions: true,
-          appInfo: {
-            name: "StarterKit",
-          },
-        }}
-      >
-        <body className={inter.className}>
-          <NavBar />
-          {children}
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ArweaveWalletKit
+              config={{
+                permissions: [
+                  "ACCESS_ADDRESS",
+                  "SIGN_TRANSACTION",
+                  "DISPATCH",
+                  "ACCESS_PUBLIC_KEY",
+                  "SIGNATURE",
+                ],
+                ensurePermissions: true,
+                appInfo: {
+                  name: "StarterKit",
+                },
+              }}
+            >
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">{children}</div>
+              </div>
+              <TailwindIndicator />
+            </ArweaveWalletKit>
+          </ThemeProvider>
         </body>
-      </ArweaveWalletKit>
-    </html>
+      </html>
+    </>
   );
 }
