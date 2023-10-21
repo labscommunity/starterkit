@@ -1,14 +1,7 @@
-const validationRegExp = /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
+import validatePackageName from "validate-npm-package-name";
+import { removeTrailingSlash } from "./removeTrailingSlash.js";
 
-export const removeTrailingSlash = (input: string) => {
-  if (input.length > 1 && input.endsWith("/")) {
-    input = input.slice(0, -1);
-  }
-
-  return input;
-};
-
-//Validate a string against allowed package.json names
+// Validate a string against allowed package.json names
 export const validateAppName = (rawInput: string) => {
   const input = removeTrailingSlash(rawInput);
   const paths = input.split("/");
@@ -21,10 +14,13 @@ export const validateAppName = (rawInput: string) => {
     appName = paths.slice(indexOfDelimiter).join("/");
   }
 
-  if (input === "." || validationRegExp.test(appName ?? "")) {
+  const nameValidation = validatePackageName(appName ?? "");
+
+  if (input === "." || nameValidation.validForNewPackages) {
     return;
   } else {
-    return "App name must consist of only lowercase alphanumeric characters, '-', and '_'";
+    const errors = [...(nameValidation.errors || []), ...(nameValidation.warnings || [])];
+    return errors.map((error) => `* ${error}`).join("\n");
   }
 };
 

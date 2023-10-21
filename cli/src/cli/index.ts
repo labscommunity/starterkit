@@ -12,6 +12,7 @@ interface CliResults {
     noGit: boolean;
     noInstall: boolean;
     default: boolean;
+    language: string;
     importAlias: string;
     appRouter: boolean;
   };
@@ -23,6 +24,7 @@ const defaultOptions: CliResults = {
     noGit: false,
     noInstall: false,
     default: false,
+    language: "typescript",
     importAlias: "@/",
     appRouter: false,
   },
@@ -38,6 +40,7 @@ export const runCli = async (): Promise<CliResults> => {
     .option("--noGit", "Explicitely tell the CLI to not initialize a new git repo in the project", false)
     .option("--noIntall", "Explicitely tell the CLI to not run the package manager's install command", false)
     .option("-y, --default", "Bypass the CLI and use all default options to bootstrap a new arweave app", false)
+    .option("-l, --language <type>", "Initialize project as a Typescript project", defaultOptions.flags.language)
     .option(
       "-i, --import-alias",
       "Explicitly tell the CLI to use a custom import alias",
@@ -130,6 +133,7 @@ export const runCli = async (): Promise<CliResults> => {
       noGit: !project.git ?? cliResults.flags.noGit,
       noInstall: !project.install ?? cliResults.flags.noInstall,
       importAlias: project.importAlias ?? cliResults.flags.importAlias,
+      language: project.language ?? cliResults.flags.language,
     },
   };
 };

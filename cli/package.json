@@ -1,7 +1,7 @@
 {
-  "name": "starterkit",
+  "name": "create-perma-app",
   "version": "0.0.0",
-  "description": "Create Arweave web application with starterkit",
+  "description": "Create Arweave web application with create-perma-app",
   "author": "CommunityLabs",
   "license": "MIT",
   "publishConfig": {
@@ -17,6 +17,7 @@
   },
   "keywords": [
     "starterkit",
+    "create-perma-app",
     "walletkit",
     "arweavekit",
     "arweave",
@@ -25,7 +26,7 @@
   "type": "module",
   "exports": "./dist/index.js",
   "bin": {
-    "starterkit": "./dist/index.js"
+    "create-perma-app": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -47,7 +48,8 @@
     "lint:fix": "pnpm lint --fix",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path .gitignore --write",
     "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path .gitignore --check",
-    "release": "bumpp && npm publish"
+    "release": "changeset version",
+    "publish": "pnpm run build && changeset publish"
   },
   "dependencies": {
     "@clack/core": "^0.3.2",
@@ -55,19 +57,22 @@
     "chalk": "5.2.0",
     "commander": "^10.0.0",
     "execa": "^7.1.1",
+    "figlet": "^1.6.0",
     "fs-extra": "^11.1.1",
     "gradient-string": "^2.0.2",
     "ora": "6.3.1",
-    "sort-package-json": "^2.4.1"
+    "sort-package-json": "^2.4.1",
+    "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
+    "@types/figlet": "^1.5.7",
     "@types/fs-extra": "^11.0.1",
     "@types/gradient-string": "^1.1.2",
     "@types/inquirer": "^9.0.3",
     "@types/node": "^18.16.0",
+    "@types/validate-npm-package-name": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
-    "bumpp": "^9.2.0",
     "eslint": "^8.51.0",
     "prettier": "^3.0.0",
     "tsup": "^6.7.0",
