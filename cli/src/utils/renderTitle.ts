@@ -10,9 +10,9 @@ export const renderTitle = async () => {
       CLI_NAME.replace(new RegExp("-", "g"), " ").toUpperCase(),
       {
         font: "Standard",
-        horizontalLayout: "full",
+        horizontalLayout: "fitted",
       },
-      (err: any, data: unknown) => {
+      (err: unknown, data: unknown) => {
         const sKgradient = gradient(colors);
 
         console.log(sKgradient.multiline((err ? CLI_NAME : data) as string));

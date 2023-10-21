@@ -15,6 +15,7 @@ import { initializeGit } from "@/helpers/git.js";
 import { installDependencies } from "@/helpers/installDependencies.js";
 import { logNextSteps } from "@/helpers/logNextSteps.js";
 import { setImportAlias } from "@/helpers/setImportAlias.js";
+import { getNpmVersion, renderVersionWarning } from "@/utils/renderVersionWarning.js";
 
 type StarterKitPackageJSON = PackageJson & {
   starterKitMetadata?: {
@@ -23,9 +24,10 @@ type StarterKitPackageJSON = PackageJson & {
 };
 
 const main = async () => {
+  const npmVersion = await getNpmVersion();
   const pkgManager = getUserPkgManager();
-
   await renderTitle();
+  npmVersion && renderVersionWarning(npmVersion);
 
   const {
     appName,
