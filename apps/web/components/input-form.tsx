@@ -1,7 +1,7 @@
 import Image from "next/image";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm, Controller } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -29,15 +29,23 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 
 // zod schema for form inputs
-const imageSchema = z.object({
-  image: z
-    .any()
-    .refine((files) => files?.length == 1, "Image is required.")
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      ".jpg, .jpeg, .png and .webp files are accepted."
-    ),
-});
+const imageSchema = z
+  .any()
+  .refine(
+    (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
+    `.jpg, .jpeg, .png and .webp files are accepted`
+  );
+// .superRefine((f, ctx) => {
+//   // First, add an issue if the mime type is wrong.
+//   if (!ACCEPTED_IMAGE_TYPES.includes(f.type)) {
+//     ctx.addIssue({
+//       code: z.ZodIssueCode.custom,
+//       message: `File must be one of [${ACCEPTED_IMAGE_TYPES.join(
+//         ", "
+//       )}] but was ${f.type}`,
+//     });
+//   }
+// });
 
 const formSchema = z.object({
   image: imageSchema,
@@ -75,7 +83,7 @@ export function InputForm() {
 
   function onSubmit(values: InputFormValues) {
     // This will be type-safe and validated.
-    console.log(values);
+    console.log("Value of Submission >>>>>>>>>>>>>>>", values);
   }
 
   return (
@@ -100,14 +108,24 @@ export function InputForm() {
         <FormField
           control={form.control}
           name="image"
-          render={({ field: { onChange, value, ...rest } }) => {
+          render={({ field: { onChange: onChangeField, value, ...rest } }) => {
             return (
               <FormItem>
                 <FormLabel>Image *</FormLabel>
                 <FormControl>
                   <Input
                     type="file"
-                    onChange={(e) => onChange(e.target.files?.[0])}
+                    onChange={(e) =>
+                      onChangeField(
+                        e.target.files
+                          ? (() => {
+                              const file = e.target.files?.[0];
+                              setPreview(URL.createObjectURL(file));
+                              return file;
+                            })()
+                          : null
+                      )
+                    }
                     {...rest}
                   />
                 </FormControl>
@@ -179,6 +197,7 @@ export function InputForm() {
             <Button
               className={buttonVariants({ variant: "secondary" })}
               onClick={() => append({ value: "" })}
+              type="button"
             >
               Add Tag
             </Button>
