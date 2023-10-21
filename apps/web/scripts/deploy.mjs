@@ -47,6 +47,12 @@ import path from "path";
   );
   const newSrcId = await warp.saveSource(newSource);
 
+  // write new function source's transaction id to new file
+  fs.writeFileSync(
+    path.join(__dirname, "contracts", "contractData.json"),
+    JSON.stringify({ contractSourceId: newSrcId })
+  );
+
   // log new function source's transaction id
   console.log("New Source Contract Id: ", newSrcId);
 })();
