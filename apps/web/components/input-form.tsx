@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
