@@ -30,17 +30,13 @@ const ACCEPTED_IMAGE_TYPES = [
 
 // zod schema for form inputs
 const imageSchema = z.object({
-  image: z.instanceof(File).superRefine((f, ctx) => {
-    // First, add an issue if the mime type is wrong.
-    if (!ACCEPTED_IMAGE_TYPES.includes(f.type)) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: `File must be one of [${ACCEPTED_IMAGE_TYPES.join(
-          ", "
-        )}] but was ${f.type}`,
-      });
-    }
-  }),
+  image: z
+    .any()
+    .refine((files) => files?.length == 1, "Image is required.")
+    .refine(
+      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      ".jpg, .jpeg, .png and .webp files are accepted."
+    ),
 });
 
 const formSchema = z.object({
@@ -65,7 +61,6 @@ export function InputForm() {
   const form = useForm<InputFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      image: undefined,
       title: "",
       description: "",
       tags: [],
@@ -81,21 +76,6 @@ export function InputForm() {
   function onSubmit(values: InputFormValues) {
     // This will be type-safe and validated.
     console.log(values);
-  }
-
-  function getImageData(event: ChangeEvent<HTMLInputElement>) {
-    // FileList is immutable, so we need to create a new one
-    const dataTransfer = new DataTransfer();
-
-    // Add newly uploaded images
-    Array.from(event.target.files!).forEach((image) =>
-      dataTransfer.items.add(image)
-    );
-
-    const files = dataTransfer.files;
-    const displayUrl = URL.createObjectURL(event.target.files![0]);
-
-    return { files, displayUrl };
   }
 
   return (
@@ -116,32 +96,27 @@ export function InputForm() {
               />
             </AspectRatio>
           </div>
-        ) : (
-          <FormField
-            control={form.control}
-            name="image"
-            render={({ field: { onChange, value, ...rest } }) => {
-              // const { onChange: onChangeField, ...restField } = field;
-              return (
-                <FormItem>
-                  <FormLabel>Image *</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      {...rest}
-                      onChange={(event) => {
-                        const { files, displayUrl } = getImageData(event);
-                        setPreview(displayUrl);
-                        onChange(files);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-        )}
+        ) : null}
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field: { onChange, value, ...rest } }) => {
+            return (
+              <FormItem>
+                <FormLabel>Image *</FormLabel>
+                <FormControl>
+                  <Input
+                    type="file"
+                    onChange={(e) => onChange(e.target.files?.[0])}
+                    {...rest}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
         <div className="flex flex-col md:flex-row w-full gap-5">
           <div className="w-full md:w-1/2">
             <FormField
