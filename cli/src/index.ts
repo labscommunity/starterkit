@@ -17,8 +17,8 @@ import { logNextSteps } from "@/helpers/logNextSteps.js";
 import { setImportAlias } from "@/helpers/setImportAlias.js";
 import { getNpmVersion, renderVersionWarning } from "@/utils/renderVersionWarning.js";
 
-type StarterKitPackageJSON = PackageJson & {
-  starterKitMetadata?: {
+type CPAPackageJSON = PackageJson & {
+  cpaMetadata?: {
     initVersion: string;
   };
 };
@@ -46,9 +46,9 @@ const main = async () => {
   });
 
   // Write name to package.json
-  const pkgJson = fs.readJSONSync(path.join(projectDir, "package.json")) as StarterKitPackageJSON;
+  const pkgJson = fs.readJSONSync(path.join(projectDir, "package.json")) as CPAPackageJSON;
   pkgJson.name = scopedAppName;
-  pkgJson.starterKitMetadata = { initVersion: getVersion() };
+  pkgJson.cpaMetadata = { initVersion: getVersion() };
 
   // ? Bun doesn't support this field (yet)
   if (pkgManager !== "bun") {

@@ -17,6 +17,7 @@ export const scaffoldProject = async ({
   language,
 }: InstallerOptions) => {
   const srcDir = path.join(PKG_ROOT, `template/next/${language}`);
+  const srcCommonDir = path.join(PKG_ROOT, `template/next/common`);
 
   if (!noInstall) {
     logger.info(`\nUsing: ${chalk.cyan.bold(pkgManager)}\n`);
@@ -69,7 +70,7 @@ export const scaffoldProject = async ({
       }
 
       if (overwriteDir === "clear") {
-        spinner.info(`Emptying ${chalk.cyan.bold(projectName)} and creating t3 app..\n`);
+        spinner.info(`Emptying ${chalk.cyan.bold(projectName)} and creating perma app..\n`);
         fs.emptyDirSync(projectDir);
       }
     }
@@ -78,6 +79,7 @@ export const scaffoldProject = async ({
   spinner.start();
 
   fs.copySync(srcDir, projectDir);
+  fs.copySync(srcCommonDir, projectDir);
   fs.renameSync(path.join(projectDir, "_gitignore"), path.join(projectDir, ".gitignore"));
 
   const scaffoldedName = projectName === "." ? "App" : chalk.cyan.bold(projectName);
