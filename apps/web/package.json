@@ -10,6 +10,9 @@
     "deploy-contracts": "node ./scripts/deploy.mjs"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
+    "@radix-ui/react-aspect-ratio": "^1.0.3",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "arweave-wallet-kit": "^1.0.3",
     "class-variance-authority": "^0.7.0",
@@ -19,12 +22,14 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.47.0",
     "react-responsive": "^9.0.2",
     "sharp": "^0.31.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "warp-contracts": "^1.4.21",
-    "warp-contracts-plugin-deploy": "^1.0.9"
+    "warp-contracts-plugin-deploy": "^1.0.9",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",
