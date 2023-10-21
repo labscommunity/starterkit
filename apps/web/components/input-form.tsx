@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { postAsset } from "@/lib/post";
+import { useActiveAddress, useConnection } from "arweave-wallet-kit";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -35,21 +37,11 @@ const imageSchema = z
     (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
     `.jpg, .jpeg, .png and .webp files are accepted`
   );
-// .superRefine((f, ctx) => {
-//   // First, add an issue if the mime type is wrong.
-//   if (!ACCEPTED_IMAGE_TYPES.includes(f.type)) {
-//     ctx.addIssue({
-//       code: z.ZodIssueCode.custom,
-//       message: `File must be one of [${ACCEPTED_IMAGE_TYPES.join(
-//         ", "
-//       )}] but was ${f.type}`,
-//     });
-//   }
-// });
 
 const formSchema = z.object({
   image: imageSchema,
   title: z.string(),
+  creatorName: z.string().optional(),
   description: z.string().optional(),
   tags: z
     .array(
@@ -65,11 +57,13 @@ type InputFormValues = z.infer<typeof formSchema>;
 
 export function InputForm() {
   const [preview, setPreview] = useState("");
+
   // defining form based on zod schema
   const form = useForm<InputFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      creatorName: "",
       description: "",
       tags: [],
       // license: "",
@@ -81,9 +75,20 @@ export function InputForm() {
     control: form.control,
   });
 
+  const { connected } = useConnection();
+  const activeAddress = useActiveAddress();
+
   function onSubmit(values: InputFormValues) {
     // This will be type-safe and validated.
-    console.log("Value of Submission >>>>>>>>>>>>>>>", values);
+
+    postAsset({
+      file: values.image,
+      title: values.title,
+      description: values.description ? values.description : "",
+      tags: values.tags ? values.tags : [],
+      creatorName: values.creatorName ? values.creatorName : "",
+      creatorId: activeAddress ? activeAddress : "",
+    });
   }
 
   return (
@@ -134,9 +139,8 @@ export function InputForm() {
             );
           }}
         />
-
         <div className="flex flex-col md:flex-row w-full gap-5">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 space-y-5">
             <FormField
               control={form.control}
               name="title"
@@ -145,6 +149,19 @@ export function InputForm() {
                   <FormLabel>Title *</FormLabel>
                   <FormControl>
                     <Input placeholder="title" {...field} required />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="creatorName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Creator</FormLabel>
+                  <FormControl>
+                    <Input placeholder="creatorName" {...field} required />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
