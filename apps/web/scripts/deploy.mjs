@@ -19,7 +19,7 @@ import path from "path";
   const __dirname = path.resolve();
 
   await esbuild.build({
-    entryPoints: ["contracts/contract.ts"],
+    entryPoints: ["src/contracts/contract.ts"],
     bundle: true,
     outfile: "contracts-dist/contract.js",
     format: "esm",
@@ -49,8 +49,8 @@ import path from "path";
 
   // write new function source's transaction id to new file
   fs.writeFileSync(
-    path.join(__dirname, "contracts", "contractData.json"),
-    JSON.stringify({ contractSourceId: newSrcId })
+    path.join(__dirname, "src", "contracts", "contractData.json"),
+    JSON.stringify({ contractId: newSrcId })
   );
 
   // log new function source's transaction id
