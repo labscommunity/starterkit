@@ -35,13 +35,11 @@ export const createProject = async ({
     language,
   });
 
-  // Select necessary _app,index / layout,page files
+  // Remove pages/app depending upon appRouter
   if (appRouter) {
-    // Replace next.config
-    // fs.copyFileSync(
-    //   path.join(PKG_ROOT, "template/extras/config/next-config-appdir.mjs"),
-    //   path.join(projectDir, "next.config.mjs")
-    // );
+    fs.rmSync(path.join(projectDir, "pages"), { recursive: true, force: true });
+  } else {
+    fs.rmSync(path.join(projectDir, "app"), { recursive: true, force: true });
   }
 
   return projectDir;

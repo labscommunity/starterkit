@@ -26,7 +26,7 @@ const defaultOptions: CliResults = {
     default: false,
     language: "typescript",
     importAlias: "@/",
-    appRouter: false,
+    appRouter: true,
   },
 };
 
@@ -90,7 +90,7 @@ export const runCli = async (): Promise<CliResults> => {
       appRouter: () => {
         return p.confirm({
           message: "Would you like to use Next.js App Router?",
-          initialValue: false,
+          initialValue: true,
         });
       },
       ...(!cliResults.flags.noGit && {

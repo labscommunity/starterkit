@@ -58,6 +58,18 @@ const main = async () => {
     pkgJson.packageManager = `${pkgManager}@${stdout.trim()}`;
   }
 
+  if (language === "javascript" && pkgJson.devDependencies !== undefined) {
+    pkgJson.devDependencies = Object.keys(pkgJson.devDependencies)
+      .filter((key) => !key.startsWith("@types/"))
+      .reduce(
+        (result, key) => {
+          result[key] = pkgJson.devDependencies?.[key];
+          return result;
+        },
+        {} as Partial<Record<string, string>>
+      );
+  }
+
   fs.writeJSONSync(path.join(projectDir, "package.json"), pkgJson, {
     spaces: 2,
   });

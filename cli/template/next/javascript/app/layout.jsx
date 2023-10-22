@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@/styles/globals.css";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/lib/fonts";
