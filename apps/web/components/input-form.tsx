@@ -84,10 +84,10 @@ export function InputForm() {
     postAsset({
       file: values.image,
       title: values.title,
-      description: values.description ? values.description : "",
-      tags: values.tags ? values.tags : [],
-      creatorName: values.creatorName ? values.creatorName : "",
-      creatorId: activeAddress ? activeAddress : "",
+      description: values.description || "",
+      tags: values.tags || [],
+      creatorName: values.creatorName || "",
+      creatorId: activeAddress || "",
     });
   }
 
