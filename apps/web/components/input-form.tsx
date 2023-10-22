@@ -15,11 +15,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postAsset } from "@/lib/post";
 import { useActiveAddress, useConnection } from "arweave-wallet-kit";
+import { useToast } from "@/components/ui/use-toast";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -78,18 +79,38 @@ export function InputForm() {
   const { connected } = useConnection();
   const activeAddress = useActiveAddress();
 
-  function onSubmit(values: InputFormValues) {
-    // This will be type-safe and validated.
+  const { toast } = useToast();
 
-    postAsset({
-      file: values.image,
-      title: values.title,
-      description: values.description || "",
-      tags: values.tags || [],
-      creatorName: values.creatorName || "",
-      creatorId: activeAddress || "",
-    });
+  async function onSubmit(values: InputFormValues) {
+    // This will be type-safe and validated.
+    try {
+      const transactionId = await postAsset({
+        file: values.image,
+        title: values.title,
+        description: values.description || "",
+        tags: values.tags || [],
+        creatorName: values.creatorName || "",
+        creatorId: activeAddress || "",
+      });
+      toast({
+        title: "Success!",
+        description: `View transaction at https://g8way.io/${transactionId}`,
+      });
+    } catch (error: any) {
+      console.log(error);
+      toast({
+        title: "Something went wrong!",
+        description: error.message || "Unknown Error",
+      });
+    }
   }
+
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      form.reset();
+      setPreview("");
+    }
+  }, [form.formState, form.reset]);
 
   return (
     <Form {...form}>
@@ -99,7 +120,7 @@ export function InputForm() {
       >
         {preview ? (
           <div className="w-full flex flex-col gap-6">
-            <AspectRatio ratio={16 / 9} className="w-1/2 mx-auto">
+            <AspectRatio ratio={16 / 9} className="w-1/2 md:w-1/3 mx-auto">
               <Image
                 src={preview}
                 alt="Image"
@@ -109,7 +130,10 @@ export function InputForm() {
               />
             </AspectRatio>
             <Button
-              className={buttonVariants({ variant: "ghost" })}
+              className={cn(
+                buttonVariants({ variant: "secondary" }),
+                "hover:text-red-500"
+              )}
               onClick={() => setPreview("")}
             >
               Clear Image
@@ -124,10 +148,13 @@ export function InputForm() {
             }) => {
               return (
                 <FormItem>
-                  <FormLabel>Image *</FormLabel>
+                  <FormLabel>
+                    Image <span className="text-red-500">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="file"
+                      accept={ACCEPTED_IMAGE_TYPES.join(",")}
                       onChange={(e) =>
                         onChangeField(
                           e.target.files
@@ -140,6 +167,7 @@ export function InputForm() {
                         )
                       }
                       {...rest}
+                      required
                     />
                   </FormControl>
                   <FormMessage />
@@ -156,7 +184,9 @@ export function InputForm() {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Title *</FormLabel>
+                  <FormLabel>
+                    Title <span className="text-red-500">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="title" {...field} required />
                   </FormControl>
@@ -171,7 +201,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>Creator</FormLabel>
                   <FormControl>
-                    <Input placeholder="creatorName" {...field} required />
+                    <Input placeholder="creatorName" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -209,7 +239,9 @@ export function InputForm() {
                       <div className="flex w-full gap-4">
                         <Input {...field} />
                         <Button
-                          className={buttonVariants({ variant: "secondary" })}
+                          className={buttonVariants({
+                            variant: "secondary",
+                          })}
                           onClick={() => remove(index)}
                         >
                           X

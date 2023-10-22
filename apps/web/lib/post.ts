@@ -1,5 +1,5 @@
 import { Asset } from "@/types/post";
-import { contractId } from "@/contracts/contractData.json";
+import contractData from "@/contracts/contractData.json";
 import { createTransaction } from "arweavekit/transaction";
 
 const toArrayBuffer = async (file: File): Promise<ArrayBuffer> =>
@@ -11,7 +11,7 @@ const toArrayBuffer = async (file: File): Promise<ArrayBuffer> =>
     });
   });
 
-export async function postAsset(asset: Asset) {
+export async function postAsset(asset: Asset): Promise<string> {
   const data: ArrayBuffer = await toArrayBuffer(asset.file);
 
   // array of input tags
@@ -22,7 +22,7 @@ export async function postAsset(asset: Asset) {
     { name: "App-Name", value: "SmartWeaveContract" },
     { name: "App-Version", value: "0.3.0" },
     // Link post to contract source
-    { name: "Contract-Src", value: contractId },
+    { name: "Contract-Src", value: contractData.contractId },
     // Initial state for our post (as a contract instance)
     {
       name: "Init-State",
@@ -63,4 +63,6 @@ export async function postAsset(asset: Asset) {
 
   console.log("PRE Transaction data >>>>>>>>>>>>>>", asset, inputTags);
   console.log("POST Transaction data >>>>>>>>>>>>>>", txn);
+
+  return txn.transaction.id;
 }
