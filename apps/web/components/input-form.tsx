@@ -98,8 +98,8 @@ export function InputForm() {
         className="space-y-8 flex flex-col w-full"
       >
         {preview ? (
-          <div className="w-full">
-            <AspectRatio ratio={16 / 9}>
+          <div className="w-full flex flex-col gap-6">
+            <AspectRatio ratio={16 / 9} className="w-1/2 mx-auto">
               <Image
                 src={preview}
                 alt="Image"
@@ -108,37 +108,47 @@ export function InputForm() {
                 className="rounded-md object-cover"
               />
             </AspectRatio>
+            <Button
+              className={buttonVariants({ variant: "ghost" })}
+              onClick={() => setPreview("")}
+            >
+              Clear Image
+            </Button>
           </div>
-        ) : null}
-        <FormField
-          control={form.control}
-          name="image"
-          render={({ field: { onChange: onChangeField, value, ...rest } }) => {
-            return (
-              <FormItem>
-                <FormLabel>Image *</FormLabel>
-                <FormControl>
-                  <Input
-                    type="file"
-                    onChange={(e) =>
-                      onChangeField(
-                        e.target.files
-                          ? (() => {
-                              const file = e.target.files?.[0];
-                              setPreview(URL.createObjectURL(file));
-                              return file;
-                            })()
-                          : null
-                      )
-                    }
-                    {...rest}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            );
-          }}
-        />
+        ) : (
+          <FormField
+            control={form.control}
+            name="image"
+            render={({
+              field: { onChange: onChangeField, value, ...rest },
+            }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Image *</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      onChange={(e) =>
+                        onChangeField(
+                          e.target.files
+                            ? (() => {
+                                const file = e.target.files?.[0];
+                                setPreview(URL.createObjectURL(file));
+                                return file;
+                              })()
+                            : null
+                        )
+                      }
+                      {...rest}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+        )}
+
         <div className="flex flex-col md:flex-row w-full gap-5">
           <div className="w-full md:w-1/2 space-y-5">
             <FormField
