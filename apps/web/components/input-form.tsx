@@ -102,6 +102,7 @@ export function InputForm() {
         title: "Something went wrong!",
         description: error.message || "Unknown Error",
       });
+      throw error;
     }
   }
 
