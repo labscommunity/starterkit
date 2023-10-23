@@ -249,112 +249,6 @@ importers:
         specifier: ^5.0.4
         version: 5.2.2
 
-  cli/template/next/common:
-    dependencies:
-      '@hookform/resolvers':
-        specifier: ^3.3.2
-        version: 3.3.2(react-hook-form@7.47.0)
-      '@radix-ui/react-aspect-ratio':
-        specifier: ^1.0.3
-        version: 1.0.3(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-dialog':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-label':
-        specifier: ^2.0.2
-        version: 2.0.2(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-slot':
-        specifier: ^1.0.2
-        version: 1.0.2(@types/react@18.2.31)(react@18.2.0)
-      '@radix-ui/react-toast':
-        specifier: ^1.1.5
-        version: 1.1.5(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
-      arweave-wallet-kit:
-        specifier: ^1.0.3
-        version: 1.0.3(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
-      arweavekit:
-        specifier: ^1.5.1
-        version: 1.5.1(@solana/web3.js@1.87.2)(typescript@5.2.2)(warp-arbundles@1.0.4)
-      class-variance-authority:
-        specifier: ^0.7.0
-        version: 0.7.0
-      clsx:
-        specifier: ^2.0.0
-        version: 2.0.0
-      lucide-react:
-        specifier: ^0.288.0
-        version: 0.288.0(react@18.2.0)
-      next:
-        specifier: 13.5.6
-        version: 13.5.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
-      next-themes:
-        specifier: ^0.2.1
-        version: 0.2.1(next@13.5.6)(react-dom@18.2.0)(react@18.2.0)
-      react:
-        specifier: ^18
-        version: 18.2.0
-      react-dom:
-        specifier: ^18
-        version: 18.2.0(react@18.2.0)
-      react-hook-form:
-        specifier: ^7.47.0
-        version: 7.47.0(react@18.2.0)
-      react-responsive:
-        specifier: ^9.0.2
-        version: 9.0.2(react@18.2.0)
-      sharp:
-        specifier: ^0.31.3
-        version: 0.31.3
-      tailwind-merge:
-        specifier: ^1.14.0
-        version: 1.14.0
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.3)
-      warp-contracts:
-        specifier: ^1.4.21
-        version: 1.4.21
-      warp-contracts-plugin-deploy:
-        specifier: ^1.0.9
-        version: 1.0.9(@solana/web3.js@1.87.2)(typescript@5.2.2)(warp-arbundles@1.0.4)(warp-contracts@1.4.21)
-      zod:
-        specifier: ^3.22.4
-        version: 3.22.4
-    devDependencies:
-      '@types/node':
-        specifier: ^20
-        version: 20.8.7
-      '@types/react':
-        specifier: ^18
-        version: 18.2.31
-      '@types/react-dom':
-        specifier: ^18
-        version: 18.2.14
-      autoprefixer:
-        specifier: ^9.0.0
-        version: 9.0.0
-      esbuild:
-        specifier: ^0.19.5
-        version: 0.19.5
-      eslint:
-        specifier: ^8
-        version: 8.52.0
-      eslint-config-next:
-        specifier: 13.5.6
-        version: 13.5.6(eslint@8.52.0)(typescript@5.2.2)
-      postcss:
-        specifier: ^8
-        version: 8.4.31
-      replace-in-file:
-        specifier: ^7.0.1
-        version: 7.0.1
-      tailwindcss:
-        specifier: ^3
-        version: 3.3.3
-      typescript:
-        specifier: ^5
-        version: 5.2.2
-
   packages/eslint-config-custom:
     devDependencies:
       '@vercel/style-guide':
@@ -4501,7 +4395,7 @@ packages:
       '@typescript-eslint/type-utils': 6.8.0(eslint@8.52.0)(typescript@5.2.2)
       '@typescript-eslint/utils': 6.8.0(eslint@8.52.0)(typescript@5.2.2)
       '@typescript-eslint/visitor-keys': 6.8.0
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.52.0
       graphemer: 1.4.0
       ignore: 5.2.4
@@ -4603,7 +4497,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 6.8.0(typescript@5.2.2)
       '@typescript-eslint/utils': 6.8.0(eslint@8.52.0)(typescript@5.2.2)
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.52.0
       ts-api-utils: 1.0.3(typescript@5.2.2)
       typescript: 5.2.2
@@ -6768,18 +6662,6 @@ packages:
     dependencies:
       ms: 2.1.2
     dev: false
-
-  /debug@4.3.4:
-    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-    dev: true
 
   /debug@4.3.4(supports-color@8.1.1):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -12887,7 +12769,7 @@ packages:
       bundle-require: 4.0.2(esbuild@0.17.19)
       cac: 6.7.14
       chokidar: 3.5.3
-      debug: 4.3.4
+      debug: 4.3.4(supports-color@8.1.1)
       esbuild: 0.17.19
       execa: 5.1.1
       globby: 11.1.0
