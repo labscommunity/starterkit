@@ -19,7 +19,11 @@ import path from "path";
   const __dirname = path.resolve();
 
   await esbuild.build({
-    entryPoints: ["src/contracts/contract.ts"],
+    entryPoints: [
+      `src/contracts/contract.${
+        fs.existsSync("src/contracts/contract.ts") ? "ts" : "js"
+      }`,
+    ],
     bundle: true,
     outfile: "contracts-dist/contract.js",
     format: "esm",
