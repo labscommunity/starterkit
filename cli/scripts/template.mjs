@@ -127,7 +127,7 @@ export async function convertTsxToJsx(srcDir, destDir) {
   fs.emptyDirSync(JAVASCRIPT_DIR);
 
   // Convert TSX to JSX
-  await convertTsxToJsx(WEB_DIR, JAVASCRIPT_DIR);
+  await convertTsxToJsx(path.join(WEB_DIR, "src"), JAVASCRIPT_DIR);
 
   // Remove .next directory
   fs.removeSync(path.join(JAVASCRIPT_DIR, ".next"));
