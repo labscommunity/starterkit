@@ -70,7 +70,7 @@ export const scaffoldProject = async ({
       }
 
       if (overwriteDir === "clear") {
-        spinner.info(`Emptying ${chalk.cyan.bold(projectName)} and creating perma app..\n`);
+        spinner.info(`Emptying ${chalk.cyan.bold(projectName)} and creating arweave app..\n`);
         fs.emptyDirSync(projectDir);
       }
     }
