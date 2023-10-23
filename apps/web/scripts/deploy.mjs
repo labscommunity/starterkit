@@ -19,7 +19,11 @@ import path from "path";
   const __dirname = path.resolve();
 
   await esbuild.build({
-    entryPoints: ["contracts/contract.ts"],
+    entryPoints: [
+      `src/contracts/contract.${
+        fs.existsSync("src/contracts/contract.ts") ? "ts" : "js"
+      }`,
+    ],
     bundle: true,
     outfile: "contracts-dist/contract.js",
     format: "esm",
@@ -46,6 +50,12 @@ import path from "path";
     new ArweaveSigner(key)
   );
   const newSrcId = await warp.saveSource(newSource);
+
+  // write new function source's transaction id to new file
+  fs.writeFileSync(
+    path.join(__dirname, "src", "contracts", "contractData.json"),
+    JSON.stringify({ contractId: newSrcId })
+  );
 
   // log new function source's transaction id
   console.log("New Source Contract Id: ", newSrcId);
