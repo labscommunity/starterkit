@@ -3,6 +3,7 @@
   "scripts": {
     "build:cli": "turbo build --filter=create-perma-app",
     "build:web": "turbo build --filter=web",
+    "build:templates": "turbo build:templates --filter=create-perma-app",
     "build": "turbo build",
     "start:cli": "turbo start --filter=create-perma-app",
     "start:web": "turbo start --filter=web",

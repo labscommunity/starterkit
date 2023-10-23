@@ -19,7 +19,11 @@ import path from "path";
   const __dirname = path.resolve();
 
   await esbuild.build({
-    entryPoints: [`contracts/contract.${fs.existsSync("contracts/contract.ts") ? "ts" : "js"}`],
+    entryPoints: [
+      `src/contracts/contract.${
+        fs.existsSync("src/contracts/contract.ts") ? "ts" : "js"
+      }`,
+    ],
     bundle: true,
     outfile: "contracts-dist/contract.js",
     format: "esm",
@@ -35,11 +39,23 @@ import path from "path";
   });
 
   // read contract source logic from 'handle.js' and encode it
-  const contractSource = fs.readFileSync(path.join(__dirname, "contracts-dist/contract.js"), "utf-8");
+  const contractSource = fs.readFileSync(
+    path.join(__dirname, "contracts-dist/contract.js"),
+    "utf-8"
+  );
 
   // function create new contract source
-  const newSource = await warp.createSource({ src: contractSource }, new ArweaveSigner(key));
+  const newSource = await warp.createSource(
+    { src: contractSource },
+    new ArweaveSigner(key)
+  );
   const newSrcId = await warp.saveSource(newSource);
+
+  // write new function source's transaction id to new file
+  fs.writeFileSync(
+    path.join(__dirname, "src", "contracts", "contractData.json"),
+    JSON.stringify({ contractId: newSrcId })
+  );
 
   // log new function source's transaction id
   console.log("New Source Contract Id: ", newSrcId);

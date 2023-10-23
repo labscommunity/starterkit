@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-import { PKG_ROOT } from "@/constants.js";
 import { scaffoldProject } from "@/helpers/scaffoldProject.js";
 import { getUserPkgManager } from "@/utils/getUserPkgManager.js";
 
@@ -37,9 +36,9 @@ export const createProject = async ({
 
   // Remove pages/app depending upon appRouter
   if (appRouter) {
-    fs.rmSync(path.join(projectDir, "pages"), { recursive: true, force: true });
+    fs.rmSync(path.join(projectDir, "src", "pages"), { recursive: true, force: true });
   } else {
-    fs.rmSync(path.join(projectDir, "app"), { recursive: true, force: true });
+    fs.rmSync(path.join(projectDir, "src", "app"), { recursive: true, force: true });
   }
 
   return projectDir;
