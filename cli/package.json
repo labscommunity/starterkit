@@ -1,7 +1,7 @@
 {
-  "name": "create-perma-app",
+  "name": "create-arweave-app",
   "version": "0.0.0",
-  "description": "Create Arweave web application with create-perma-app",
+  "description": "Create Arweave web application with create-arweave-app",
   "author": "CommunityLabs",
   "license": "MIT",
   "publishConfig": {
@@ -17,7 +17,7 @@
   },
   "keywords": [
     "starterkit",
-    "create-perma-app",
+    "create-arweave-app",
     "walletkit",
     "arweavekit",
     "arweave",
@@ -26,7 +26,7 @@
   "type": "module",
   "exports": "./dist/index.js",
   "bin": {
-    "create-perma-app": "./dist/index.js"
+    "create-arweave-app": "./dist/index.js"
   },
   "files": [
     "dist",
