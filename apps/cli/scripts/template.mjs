@@ -6,9 +6,9 @@ import fsPromises from "fs/promises";
 import { glob } from "glob";
 import { execa } from "execa";
 
-const WORKSPACE_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "../", "../");
+const WORKSPACE_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "../", "../", "../");
 const WEB_DIR = path.join(WORKSPACE_ROOT, "apps", "web");
-const TEMPLATE_DIR = path.join(WORKSPACE_ROOT, "cli", "template", "next");
+const TEMPLATE_DIR = path.join(WORKSPACE_ROOT, "apps", "cli", "template", "next");
 const TYPESCRIPT_DIR = path.join(TEMPLATE_DIR, "typescript");
 const JAVASCRIPT_DIR = path.join(TEMPLATE_DIR, "javascript");
 const COMMON_DIR = path.join(TEMPLATE_DIR, "common");
