@@ -10,6 +10,6 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["web", "docs", "ui", "tsconfig", "eslint-config-custom"],
+  "ignore": ["web"],
   "changedFilePatterns": ["src/**", "template/**"]
 }
