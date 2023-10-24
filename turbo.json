@@ -6,10 +6,27 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {},
+    "build:templates": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "format": {
+      "cache": false
+    },
+    "format:check": {
+      "cache": false
+    },
+    "release": {
+      "cache": false
+    },
+    "publish": {
+      "cache": false
     }
   }
 }

@@ -4,16 +4,38 @@
 node_modules
 .pnp
 .pnp.js
+package-lock.json
+yarn.lock
 
 # testing
 coverage
+*.lcov
+.nyc_output
 
-# next.js
-.next/
+# build
+build/
+public/build/
+dist/
 out/
-build
+generated/
 
-# misc
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# mics
+.idea
+.cache/
+.next/
+next-env.d.ts
+.nuxt/
+tmp/
+temp/
+.docusaurus
+*.tsbuildinfo
 .DS_Store
 *.pem
 
@@ -34,3 +56,11 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Sytem Files
+._*
+.DS_Store
+Thumbs.db
+
+# Typescript
+*.tsbuildinfo
