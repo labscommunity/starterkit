@@ -6,6 +6,7 @@ export interface Asset {
   creatorName: string;
   creatorId: string;
 }
+
 interface Tag {
   name?: string;
   value: string;
