@@ -19,8 +19,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { postAsset } from "@/lib/post";
-import { useActiveAddress, useConnection } from "arweave-wallet-kit";
 import { useToast } from "@/components/ui/use-toast";
+import { useUser } from "@/hooks/useUser";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -57,6 +57,7 @@ const formSchema = z.object({
 type InputFormValues = z.infer<typeof formSchema>;
 
 export function InputForm() {
+  const { connected, address: activeAddress } = useUser();
   const [preview, setPreview] = useState("");
 
   // defining form based on zod schema
@@ -75,9 +76,6 @@ export function InputForm() {
     name: "tags",
     control: form.control,
   });
-
-  const { connected } = useConnection();
-  const activeAddress = useActiveAddress();
 
   const { toast } = useToast();
 
@@ -263,8 +261,12 @@ export function InputForm() {
             </Button>
           </div>
         </div>
-        <Button type="submit" className={buttonVariants()}>
-          Upload Image
+        <Button
+          type="submit"
+          className={buttonVariants()}
+          disabled={!connected}
+        >
+          {connected ? "Upload Image" : "Please connect to upload an asset."}
         </Button>
       </form>
     </Form>
