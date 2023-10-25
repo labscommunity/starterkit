@@ -1,5 +1,6 @@
 import * as p from "@clack/prompts";
 import { Command, Option } from "commander";
+import chalk from "chalk";
 
 import { CLI_NAME, DEFAULT_APP_NAME } from "@/constants.js";
 import { getVersion } from "@/utils/getCliVersion.js";
@@ -50,6 +51,7 @@ export const runCli = async (): Promise<CliResults> => {
       }
       return value;
     })
+    .usage(`${chalk.green("[dir]")} [options]`)
     .option(
       "--noGit",
       "Explicitely tell the CLI to not initialize a new git repo in the project",
