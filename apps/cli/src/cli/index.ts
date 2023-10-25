@@ -119,8 +119,8 @@ export const runCli = async (): Promise<CliResults> => {
         name: () =>
           p.text({
             message: "What will your project be called?",
-            defaultValue: cliResults.appName,
-            placeholder: cliResults.appName,
+            defaultValue: defaultOptions.appName,
+            placeholder: defaultOptions.appName,
             validate: validateAppName,
           }),
       }),
@@ -132,7 +132,7 @@ export const runCli = async (): Promise<CliResults> => {
               { value: "typescript", label: "TypeScript" },
               { value: "javascript", label: "JavaScript" },
             ],
-            initialValue: "typescript",
+            initialValue: defaultOptions.flags.language,
           });
         },
       }),
@@ -140,7 +140,7 @@ export const runCli = async (): Promise<CliResults> => {
         appRouter: () => {
           return p.confirm({
             message: "Would you like to use Next.js App Router?",
-            initialValue: true,
+            initialValue: defaultOptions.flags.appRouter,
           });
         },
       }),
