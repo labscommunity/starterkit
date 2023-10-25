@@ -92,7 +92,6 @@ const main = async () => {
 
   await logNextSteps({
     projectName: appDir,
-    appRouter,
     noInstall,
     projectDir,
   });
