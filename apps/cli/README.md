@@ -11,6 +11,8 @@ To scaffold an Arweave app interactively, run the following command based on you
 ### npm
 
 ```bash
+npx create-arweave-app@latest
+# or
 npm create arweave-app@latest
 ```
 
@@ -30,6 +32,8 @@ pnpm create arweave-app@latest
 
 ```bash
 bunx create-arweave-app@latest
+# or
+bun create arweave-app@latest
 ```
 
 During the interactive setup, you'll be prompted for your project's name and other configuration options. Provide your choices to create a new Arweave application.
@@ -64,9 +68,9 @@ Options:
 You can quickly scaffold an Arweave app using `create-arweave-app` with default options by running:
 
 ```bash
-npx create-next-app@latest -y
+npx create-arweave-app@latest -y
 # or
-yarn create next-app -y
+yarn create arweave-app -y
 # or
 pnpm create arweave-app@latest -y
 # or
@@ -76,11 +80,11 @@ bunx create-arweave-app@latest -y
 You can also quickly scaffold by overriding the default options by passing the other options as well:
 
 ```bash
-npx create-next-app@latest my-app --noGit --default
+npx create-arweave-app@latest my-arweave-app --noGit --default
 # or
-yarn create next-app my-app --noGit --default
+yarn create arweave-app my-arweave-app --noGit --default
 # or
-pnpm create arweave-app@latest my-app --noGit --default
+pnpm create arweave-app@latest my-arweave-app --noGit --default
 # or
-bunx create-arweave-app@latest my-app --noGit --default
+bunx create-arweave-app@latest my-arweave-app --noGit --default
 ```
