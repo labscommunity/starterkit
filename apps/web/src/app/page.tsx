@@ -1,9 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
 import { InputForm } from "@/components/input-form";
 
 export default function IndexPage() {

@@ -25,7 +25,6 @@ export async function getAssetData(): Promise<any> {
 
     return {
       id: edges.node.id,
-      image: `https://ar-io.dev/${edges.node.id}`,
       title: findTagValue("Title", tags) || "",
       description: findTagValue("Description", tags) || "",
       topics: findTopicValues(tags),
