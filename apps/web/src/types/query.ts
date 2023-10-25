@@ -3,12 +3,12 @@ export interface QueriedAsset {
   image: string;
   title: string;
   description: string;
-  tags: string[];
+  topics: string[];
   creatorId: string;
   creatorName: string;
 }
 
-type Tag = {
+export type Tag = {
   name: string;
   value: string;
 };
