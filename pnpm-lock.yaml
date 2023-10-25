@@ -41,15 +41,9 @@ importers:
       execa:
         specifier: ^7.1.1
         version: 7.2.0
-      figlet:
-        specifier: ^1.6.0
-        version: 1.7.0
       fs-extra:
         specifier: ^11.1.1
         version: 11.1.1
-      gradient-string:
-        specifier: ^2.0.2
-        version: 2.0.2
       ora:
         specifier: 6.3.1
         version: 6.3.1
@@ -63,9 +57,6 @@ importers:
       '@types/fs-extra':
         specifier: ^11.0.1
         version: 11.0.3
-      '@types/gradient-string':
-        specifier: ^1.1.2
-        version: 1.1.4
       '@types/inquirer':
         specifier: ^9.0.3
         version: 9.0.6
@@ -3928,12 +3919,6 @@ packages:
       '@types/node': 20.8.7
     dev: true
 
-  /@types/gradient-string@1.1.4:
-    resolution: {integrity: sha512-OWP3ak0tyVtXZaUG7sWs1Og22ZWGyok074apk8t4DzuyTsfjK/c5OapsloefK/a3NVEpqSmAfM/HtmgIBmlGrQ==}
-    dependencies:
-      '@types/tinycolor2': 1.4.5
-    dev: true
-
   /@types/http-assert@1.5.4:
     resolution: {integrity: sha512-/6M9aaVk+avzCsrv1lt39AlFw4faCNI6aGll91Rxj38ZE5JI8AxApyQIRy+i1McjiJiuQ0sfuoMLxqq374ZIbA==}
     dev: false
@@ -4120,9 +4105,6 @@ packages:
     resolution: {integrity: sha512-7XsfXIsjdfJM2wFDRAtEWp3zb2aVPk5QeyZxGlVK57q4u26DczMHhJmlhr0Jqv0THwxam/L8REXkj8M2I/lcvw==}
     dependencies:
       '@types/node': 20.8.7
-
-  /@types/tinycolor2@1.4.5:
-    resolution: {integrity: sha512-uLJijDHN5E6j5n1qefF9oaeplgszXglWXWTviMoFr/YxgvbyrkFil20yDT7ljhCiTQ/BfCYtxfJS81LdTro5DQ==}
 
   /@types/validate-npm-package-name@4.0.1:
     resolution: {integrity: sha512-yzivVVAvMhDeboopQ49JNZ+9aCQV5jy4KfUw2LLFJ08oNyNFnG2Il7p/giMQBcJi4FVVqcl2vBIEll6YrKrS/Q==}
@@ -7554,14 +7536,6 @@ packages:
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
-
-  /gradient-string@2.0.2:
-    resolution: {integrity: sha512-rEDCuqUQ4tbD78TpzsMtt5OIf0cBCSDWSJtUDaF6JsAh+k0v9r++NzxNEG87oDZx9ZwGhD8DaezR2L/yrw0Jdw==}
-    engines: {node: '>=10'}
-    dependencies:
-      chalk: 4.1.2
-      tinygradient: 1.1.5
-    dev: false
 
   /grapheme-splitter@1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
@@ -11287,17 +11261,6 @@ packages:
     dependencies:
       es5-ext: 0.10.62
       next-tick: 1.1.0
-    dev: false
-
-  /tinycolor2@1.6.0:
-    resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
-    dev: false
-
-  /tinygradient@1.1.5:
-    resolution: {integrity: sha512-8nIfc2vgQ4TeLnk2lFj4tRLvvJwEfQuabdsmvDdQPT0xlk9TaNtpGd6nNRxXoK6vQhN6RSzj+Cnp5tTQmpxmbw==}
-    dependencies:
-      '@types/tinycolor2': 1.4.5
-      tinycolor2: 1.6.0
     dev: false
 
   /tmp-promise@3.0.3:

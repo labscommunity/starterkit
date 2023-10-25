@@ -18,7 +18,7 @@ import { setImportAlias } from "@/helpers/setImportAlias.js";
 import { getNpmVersion, renderVersionWarning } from "@/utils/renderVersionWarning.js";
 
 type CPAPackageJSON = PackageJson & {
-  cpaMetadata?: {
+  caaMetadata?: {
     initVersion: string;
   };
 };
@@ -26,7 +26,7 @@ type CPAPackageJSON = PackageJson & {
 const main = async () => {
   const npmVersion = await getNpmVersion();
   const pkgManager = getUserPkgManager();
-  await renderTitle();
+  renderTitle();
   npmVersion && renderVersionWarning(npmVersion);
 
   const {
@@ -48,7 +48,7 @@ const main = async () => {
   // Write name to package.json
   const pkgJson = fs.readJSONSync(path.join(projectDir, "package.json")) as CPAPackageJSON;
   pkgJson.name = scopedAppName;
-  pkgJson.cpaMetadata = { initVersion: getVersion() };
+  pkgJson.caaMetadata = { initVersion: getVersion() };
 
   // ? Bun doesn't support this field (yet)
   if (pkgManager !== "bun") {
