@@ -1,23 +1,10 @@
-"use client";
+import { Assets } from "@/components/assets";
 
-import { AssetCard } from "@/components/asset-card";
-import { useUser } from "@/hooks/useUser";
-import { getAssetData } from "@/lib/query-assets";
-import { QueriedAsset } from "@/types/query";
-import * as React from "react";
+export const metadata = {
+  title: `View`,
+};
 
 export default function ViewPage() {
-  const { connected, address } = useUser();
-  const [assets, setAssets] = React.useState<QueriedAsset[]>([]);
-
-  React.useEffect(() => {
-    async function fetchData() {
-      const data = await getAssetData();
-      setAssets(data);
-    }
-    fetchData();
-  }, [connected, address]);
-
   return (
     <div className="flex">
       <section className="container grid items-center gap-6 py-8 md:py-10 w-full">
@@ -29,11 +16,7 @@ export default function ViewPage() {
             With on-chain likes and comments.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-6">
-          {assets.map((asset) => (
-            <AssetCard {...asset} key={asset.id} />
-          ))}
-        </div>
+        <Assets />
       </section>
     </div>
   );

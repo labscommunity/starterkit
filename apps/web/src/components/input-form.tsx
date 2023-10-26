@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

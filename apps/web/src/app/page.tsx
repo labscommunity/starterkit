@@ -1,6 +1,9 @@
-"use client";
-
 import { InputForm } from "@/components/input-form";
+import { siteConfig } from "@/config/site";
+
+export const metadata = {
+  title: `Home - ${siteConfig.name}`,
+};
 
 export default function IndexPage() {
   return (
