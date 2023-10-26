@@ -27,6 +27,8 @@ import * as React from "react";
 import { QueriedComment } from "@/types/query";
 import { getComments } from "@/lib/query-comments";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Spinner } from "@/components/spinner";
+import { useToast } from "@/components/ui/use-toast";
 
 const commentSchema = z.object({
   comment: z.string(),
@@ -41,12 +43,15 @@ interface CommentFormProps {
 export function CommentDialog(props: CommentFormProps) {
   const { address } = useUser();
   const [comments, setComments] = React.useState<QueriedComment[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { toast } = useToast();
 
   const form = useForm<CommentFormValues>({
     resolver: zodResolver(commentSchema),
   });
 
   async function onSubmit(values: CommentFormValues): Promise<void> {
+    setIsLoading(true);
     try {
       const result = await createTransaction({
         type: "data",
@@ -80,8 +85,19 @@ export function CommentDialog(props: CommentFormProps) {
         props.txId,
         result.transaction
       );
+
+      toast({
+        title: "Success!",
+        description: `Added comment successfully!`,
+      });
     } catch (error: any) {
       console.log(error);
+      toast({
+        title: "Something went wrong!",
+        description: error.message || "Unknown Error",
+      });
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -107,6 +123,7 @@ export function CommentDialog(props: CommentFormProps) {
       fetchCommentData();
       form.reset({ comment: "" });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState, form.reset, onSubmit]);
 
   return (
@@ -152,7 +169,9 @@ export function CommentDialog(props: CommentFormProps) {
               )}
             />
             <DialogFooter>
-              <Button type="submit">Comment</Button>
+              <Button type="submit">
+                {isLoading ? <Spinner /> : "Comment"}
+              </Button>
             </DialogFooter>
             <p className="pt-2 text-xs text-muted-foreground">
               Comments may take sometime to load.

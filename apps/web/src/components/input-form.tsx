@@ -22,6 +22,7 @@ import { postAsset } from "@/lib/post";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useUser } from "@/hooks/useUser";
+import { Spinner } from "@/components/spinner";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -60,6 +61,7 @@ type InputFormValues = z.infer<typeof formSchema>;
 export function InputForm() {
   const { connected, address: activeAddress } = useUser();
   const [preview, setPreview] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // defining form based on zod schema
   const form = useForm<InputFormValues>({
@@ -82,6 +84,7 @@ export function InputForm() {
 
   async function onSubmit(values: InputFormValues) {
     // This will be type-safe and validated.
+    setIsLoading(true);
     try {
       const transactionId = await postAsset({
         file: values.image,
@@ -113,6 +116,8 @@ export function InputForm() {
         description: error.message || "Unknown Error",
       });
       throw error;
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -121,6 +126,7 @@ export function InputForm() {
       form.reset();
       setPreview("");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState, form.reset]);
 
   return (
@@ -278,7 +284,15 @@ export function InputForm() {
           className={buttonVariants()}
           disabled={!connected}
         >
-          {connected ? "Upload Image" : "Please connect to upload an asset."}
+          {connected ? (
+            isLoading ? (
+              <Spinner size={7} />
+            ) : (
+              "Upload Image"
+            )
+          ) : (
+            "Please connect to upload an asset."
+          )}
         </Button>
       </form>
     </Form>
