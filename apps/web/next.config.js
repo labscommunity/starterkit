@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  transpilePackages: ["warp-contracts-plugin-signature"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
