@@ -27,6 +27,7 @@ import { useUser } from "@/hooks/useUser";
 import * as React from "react";
 import { QueriedComment } from "@/types/query";
 import { getComments } from "@/lib/query-comments";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const commentSchema = z.object({
   comment: z.string(),
@@ -85,39 +86,67 @@ export function CommentDialog(props: CommentFormProps) {
     }
   }
 
-  const fetchData = async () => {
+  const fetchCommentData = async () => {
     const comments = await getComments(props.txId);
     console.log(comments);
 
     setComments(comments);
   };
 
-  React.useEffect(() => {
-    fetchData();
-  }, []);
+  function trimAddress(str: string, startLength = 4, endLength = 3) {
+    if (str.length <= startLength + endLength) {
+      return str; // Return original string if it's too short
+    }
 
-  // console.log("<<<<<<<<<<<<CommentData>>>>>>>>>>>>", comments);
+    const start = str.substring(0, startLength);
+    const end = str.substring(str.length - endLength);
+    return `${start}...${end}`;
+  }
+
+  // React.useEffect(() => {
+  //   fetchCommentData();
+  // }, [on]);
+
+  React.useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      fetchCommentData();
+      form.reset();
+    }
+  }, [form.formState, form.reset]);
 
   return (
     <Dialog>
-      <DialogTrigger onClick={() => fetchData()} asChild>
+      <DialogTrigger onClick={() => fetchCommentData()} asChild>
         <button>
           <MessageCircle size={16} />
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Leave a comment</DialogTitle>
-          <DialogDescription>Share your thoughts below.</DialogDescription>
+          <DialogTitle>See what others are saying</DialogTitle>
+          <DialogDescription>And share your thoughts too.</DialogDescription>
         </DialogHeader>
+
+        <ScrollArea className="h-36 rounded-md border p-4">
+          {comments.map((comment, index) => (
+            <div key={index} className="p-2 border-b">
+              <strong>{trimAddress(comment.creatorId)}</strong>
+              <p>{comment.comment}</p>
+            </div>
+          ))}
+        </ScrollArea>
+
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 border-t"
+          >
             <FormField
               control={form.control}
               name="comment"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className="pt-2">
                     Comment <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
@@ -128,8 +157,11 @@ export function CommentDialog(props: CommentFormProps) {
               )}
             />
             <DialogFooter>
-              <Button type="submit">Post Comment</Button>
+              <Button type="submit">Comment</Button>
             </DialogFooter>
+            <p className="pt-2 text-xs text-muted-foreground">
+              Comments may take sometime to load.
+            </p>
           </form>
         </Form>
       </DialogContent>

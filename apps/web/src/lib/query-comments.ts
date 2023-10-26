@@ -37,14 +37,13 @@ edges {
   const commentsList = await Promise.all(
     response.map(async (edges): Promise<QueriedComment> => {
       const comment = await getTransaction({
-        transactionId: txId,
+        transactionId: edges.node.id,
         environment: "mainnet",
       });
 
       return {
         id: edges.node.id,
-        // comment: new TextDecoder().decode(comment.data),
-        comment: comment.data,
+        comment: new TextDecoder().decode(comment.data),
         creatorId: edges.node.owner.address,
       };
     })
