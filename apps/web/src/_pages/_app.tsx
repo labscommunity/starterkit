@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ArweaveWalletKit } from "arweave-wallet-kit";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
+import { UserProvider } from "@/hooks/useUser";
 import { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -25,15 +26,18 @@ export default function App({ Component, pageProps }: AppProps) {
           },
         }}
       >
-        <div className="relative flex min-h-screen flex-col">
-          <SiteHeader />
-          <div className="flex-1">
-            <Component {...pageProps} />
+        <UserProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <SiteHeader />
+            <div className="flex-1">
+              <Component {...pageProps} />
+            </div>
+            <Toaster />
+            <Footer />
           </div>
-          <Toaster />
-          <Footer />
-        </div>
-        <TailwindIndicator />
+
+          <TailwindIndicator />
+        </UserProvider>
       </ArweaveWalletKit>
     </ThemeProvider>
   );
