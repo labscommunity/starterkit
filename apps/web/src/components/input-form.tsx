@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { postAsset } from "@/lib/post";
 import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 import { useUser } from "@/hooks/useUser";
 
 // Accepted MIME types
@@ -92,7 +93,18 @@ export function InputForm() {
       });
       toast({
         title: "Success!",
-        description: `View transaction at https://g8way.io/${transactionId}`,
+        description: `Atomic asset uploaded!`,
+        action: (
+          <ToastAction
+            altText="View Transaction"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(`https://g8way.io/${transactionId}`, "_blank");
+            }}
+          >
+            View Transaction
+          </ToastAction>
+        ),
       });
     } catch (error: any) {
       console.log(error);
@@ -200,7 +212,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>Creator</FormLabel>
                   <FormControl>
-                    <Input placeholder="creatorName" {...field} />
+                    <Input placeholder="creator name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
