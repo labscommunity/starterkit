@@ -117,7 +117,7 @@ export function InputForm() {
             altText="View Transaction"
             onClick={(e) => {
               e.preventDefault();
-              window.open(`https://g8way.io/${transactionId}`, "_blank");
+              window.open(`https://ar-io.dev/${transactionId}`, "_blank");
             }}
           >
             View Transaction
@@ -320,13 +320,13 @@ export function InputForm() {
             </div>
             <p className="text-xs text-muted-foreground">
               Payment option disabled if License is &quot;UDL Default Public
-              Use&quot;. Learn more on Licenses{" "}
+              Use&quot;. For more advanced Licenses read this{" "}
               <Link
                 href="https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it"
                 target="_blank"
                 className="underline"
               >
-                here
+                wiki
               </Link>
               .
             </p>
