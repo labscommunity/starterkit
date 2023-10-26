@@ -29,7 +29,7 @@ export default function ViewPage() {
             With on-chain likes and comments.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 w-full gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-6">
           {assets.map((asset) => (
             <AssetCard {...asset} key={asset.id} />
           ))}

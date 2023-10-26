@@ -23,6 +23,16 @@ import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { useUser } from "@/hooks/useUser";
 import { Spinner } from "@/components/spinner";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "@/components/ui/select";
+import Link from "next/link";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = [
@@ -46,6 +56,8 @@ const formSchema = z.object({
   title: z.string(),
   creatorName: z.string().optional(),
   description: z.string().optional(),
+  license: z.string().optional(),
+  payment: z.string().optional(),
   tags: z
     .array(
       z.object({
@@ -70,8 +82,8 @@ export function InputForm() {
       title: "",
       creatorName: "",
       description: "",
+      license: "default",
       tags: [],
-      // license: "",
     },
   });
 
@@ -128,6 +140,8 @@ export function InputForm() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState, form.reset]);
+
+  const licenseValue = form.watch("license");
 
   return (
     <Form {...form}>
@@ -193,7 +207,6 @@ export function InputForm() {
             }}
           />
         )}
-
         <div className="flex flex-col md:flex-row w-full gap-5">
           <div className="w-full md:w-1/2 space-y-5">
             <FormField
@@ -239,6 +252,81 @@ export function InputForm() {
             />
           </div>
           <div className="flex flex-col gap-4 flex-1">
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="license"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>License</FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger className={cn("w-full lg:p-0 p-6")}>
+                          <SelectValue placeholder="Choose License" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>License Options</SelectLabel>
+                            <SelectItem value="default">
+                              UDL Default Public Use
+                            </SelectItem>
+                            <SelectItem value="access">
+                              UDL Restricted Access
+                            </SelectItem>
+                            <SelectItem value="commercial">
+                              UDL Commercial Use - One Time Payment
+                            </SelectItem>
+                            <SelectItem value="derivative">
+                              UDL Derivative Works - One Time Payment
+                            </SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="payment"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Payment{" "}
+                      {licenseValue === "default" ? null : (
+                        <span className="text-red-500">*</span>
+                      )}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="License Fee in AR"
+                        {...field}
+                        disabled={licenseValue === "default"}
+                        required={licenseValue !== "default"}
+                        className={cn("w-full lg:py-0 py-6")}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Payment option disabled if License is &quot;UDL Default Public
+              Use&quot;. Learn more on Licenses{" "}
+              <Link
+                href="https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it"
+                target="_blank"
+                className="underline"
+              >
+                here
+              </Link>
+              .
+            </p>
             {fields.map((field, index) => (
               <FormField
                 control={form.control}
