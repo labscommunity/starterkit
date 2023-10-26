@@ -18,6 +18,9 @@ export async function postAsset(asset: Asset): Promise<string> {
   const inputTags: { name: string; value: string }[] = [
     // Content mime (media) type (For eg, "image/png")
     { name: "Content-Type", value: asset.file.type },
+    // { name: "Indexed-By", value: "ucm" },
+    { name: "License", value: "yRj4a5KMctX_uOmKWCFJIjmY8DeJcusVk6-HzLiM_t8" },
+    { name: "Payment-Mode", value: "Global-Distribution" },
     // Help network identify post as SmartWeave Contract
     { name: "App-Name", value: "SmartWeaveContract" },
     { name: "App-Version", value: "0.3.0" },
@@ -51,6 +54,25 @@ export async function postAsset(asset: Asset): Promise<string> {
     inputTags.push({ name: t.value, value: t.value });
   });
 
+  if (asset.license === "access") {
+    inputTags.push(
+      { name: "Access", value: "Restricted" },
+      { name: "Access-Fee", value: "One-Time-" + asset.payment }
+    );
+  }
+  if (asset.license === "derivative") {
+    inputTags.push(
+      { name: "Derivation", value: "Allowed-with-license-fee" },
+      { name: "Derivation-Fee", value: "One-Time-" + asset.payment }
+    );
+  }
+  if (asset.license === "commercial") {
+    inputTags.push(
+      { name: "Commercial-Use", value: "Allowed" },
+      { name: "Commercial-Fee", value: "One-Time-" + asset.payment }
+    );
+  }
+
   const txn = await createTransaction({
     type: "data",
     environment: "mainnet",
@@ -60,9 +82,6 @@ export async function postAsset(asset: Asset): Promise<string> {
       signAndPost: true,
     },
   });
-
-  console.log("PRE Transaction data >>>>>>>>>>>>>>", asset, inputTags);
-  console.log("POST Transaction data >>>>>>>>>>>>>>", txn);
 
   return txn.transaction.id;
 }

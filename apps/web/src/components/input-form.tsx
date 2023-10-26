@@ -102,6 +102,8 @@ export function InputForm() {
         file: values.image,
         title: values.title,
         description: values.description || "",
+        license: values.license || "default",
+        payment: values.payment || "",
         tags: values.tags || [],
         creatorName: values.creatorName || "",
         creatorId: activeAddress || "",
