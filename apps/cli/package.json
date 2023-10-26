@@ -13,7 +13,8 @@
   "homepage": "https://github.com/labscommunity/starterkit#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/labscommunity/starterkit.git"
+    "url": "https://github.com/labscommunity/starterkit",
+    "directory": "apps/cli"
   },
   "keywords": [
     "starterkit",
