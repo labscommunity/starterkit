@@ -11,10 +11,6 @@ export function balance(state, action) {
     throw new ContractError("Target is not valid.");
   }
 
-  if (typeof balances[target] !== "number") {
-    throw new ContractError("Cannot get balance, target does not exist");
-  }
-
   return {
     result: {
       target,
