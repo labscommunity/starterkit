@@ -1,7 +1,5 @@
 import * as React from "react";
-import Stamps from "@permaweb/stampjs";
-// @ts-ignore
-import { WarpFactory } from "warp-contracts";
+import Stamps, { StampJS } from "@permaweb/stampjs";
 // @ts-ignore
 import { InjectedArweaveSigner } from "warp-contracts-plugin-signature";
 import Arweave from "arweave";
@@ -14,11 +12,19 @@ import {
 import { useUser } from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
 
-const stamps = Stamps.init({
-  warp: WarpFactory.forMainnet(),
-  arweave: Arweave.init({}),
-  wallet: new InjectedArweaveSigner(window.arweaveWallet), // Ensure you have injected the Arweave wallet globally
-});
+let stampInstance: StampJS;
+
+async function getStamps() {
+  if (stampInstance) return stampInstance;
+  // @ts-ignore
+  const { WarpFactory } = await import("warp-contracts");
+  stampInstance = Stamps.init({
+    warp: WarpFactory.forMainnet(),
+    arweave: Arweave.init({}),
+    wallet: new InjectedArweaveSigner(window.arweaveWallet), // Ensure you have injected the Arweave wallet globally
+  });
+  return stampInstance;
+}
 
 interface StampProps {
   txId: string; // This is the transaction ID for the asset you want to stamp
@@ -31,6 +37,7 @@ export function Stamp(props: StampProps) {
 
   const handleStampClick = async () => {
     if (!hasStamped) {
+      const stamps = await getStamps();
       await stamps.stamp(props.txId, 0, []);
       const newCount = stampCount + 1;
       setStampCount(newCount);
@@ -40,6 +47,7 @@ export function Stamp(props: StampProps) {
 
   React.useEffect(() => {
     async function fetchStampData() {
+      const stamps = await getStamps();
       const { total } = await stamps.count(props.txId);
       const stampedStatus = await stamps.hasStamped(props.txId);
 
