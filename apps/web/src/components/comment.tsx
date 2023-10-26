@@ -1,4 +1,4 @@
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,7 +15,6 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -103,16 +102,12 @@ export function CommentDialog(props: CommentFormProps) {
     return `${start}...${end}`;
   }
 
-  // React.useEffect(() => {
-  //   fetchCommentData();
-  // }, [on]);
-
   React.useEffect(() => {
     if (form.formState.isSubmitSuccessful) {
       fetchCommentData();
-      form.reset();
+      form.reset({ comment: "" });
     }
-  }, [form.formState, form.reset]);
+  }, [form.formState, form.reset, onSubmit]);
 
   return (
     <Dialog>

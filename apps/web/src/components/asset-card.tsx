@@ -21,7 +21,7 @@ type ImageLoaderProps = {
 };
 
 const imageLoader = ({ src, width, quality }: ImageLoaderProps): string => {
-  return `https://ar-io.dev/${src}?w=${width}&q=${quality || 75}`;
+  return `https://arweave.net/${src}?w=${width}&q=${quality || 75}`;
 };
 
 export function AssetCard(props: QueriedAsset) {
@@ -42,15 +42,15 @@ export function AssetCard(props: QueriedAsset) {
         />
       </CardContent>
       <CardFooter>
-        <div className="flex flex-col gap-2">
-          <div className="flex gap-4">
+        <div className="flex flex-col gap-2 max-w-full">
+          <div className="flex gap-4 max-w-full">
             <Stamp txId={props.id} />
             <CommentDialog txId={props.id} />
           </div>
-          <p className="text-sm">{props.description}</p>
-          <div className="grid grid-flow-row grid-cols-1 md:grid-cols-[auto-fill] gap-2">
+          <p className="text-xs max-w-full">{props.description}</p>
+          <div className="grid grid-cols-3 gap-2 max-w-full">
             {props.topics.map((topic, index) => (
-              <Badge variant="outline" key={index}>
+              <Badge variant="outline" key={index} className="w-fit h-fit">
                 {topic}
               </Badge>
             ))}
