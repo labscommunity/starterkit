@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Stamp } from "@/components/stamp-like";
 import { CommentDialog } from "@/components/comment";
+import { Separator } from "@/components/ui/separator";
 
 type ImageLoaderProps = {
   src: string;
@@ -21,7 +22,7 @@ type ImageLoaderProps = {
 };
 
 const imageLoader = ({ src, width, quality }: ImageLoaderProps): string => {
-  return `https://arweave.net/${src}?w=${width}&q=${quality || 75}`;
+  return `https://ar-io.dev/${src}?w=${width}&q=${quality || 75}`;
 };
 
 export function AssetCard(props: QueriedAsset) {
@@ -54,6 +55,15 @@ export function AssetCard(props: QueriedAsset) {
                 {topic}
               </Badge>
             ))}
+          </div>
+          <Separator className="my-2" />
+          <div className="grid gap-2 max-w-full">
+            <Badge variant="outline" className="w-fit h-fit">
+              License: {props.license[0]}
+            </Badge>
+            <Badge variant="outline" className="w-fit h-fit">
+              Fee: {props.license[1]}
+            </Badge>
           </div>
         </div>
       </CardFooter>

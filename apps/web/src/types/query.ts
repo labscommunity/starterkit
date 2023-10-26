@@ -2,6 +2,7 @@ export interface QueriedAsset {
   id: string;
   title: string;
   description: string;
+  license: string[];
   topics: string[];
   creatorId: string;
   creatorName: string;

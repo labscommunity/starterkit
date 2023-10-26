@@ -83,5 +83,7 @@ export async function postAsset(asset: Asset): Promise<string> {
     },
   });
 
+  console.log("Transaction uploaded successfully", txn.transaction.id);
+
   return txn.transaction.id;
 }

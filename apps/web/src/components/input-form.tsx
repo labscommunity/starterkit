@@ -83,6 +83,7 @@ export function InputForm() {
       creatorName: "",
       description: "",
       license: "default",
+      payment: "",
       tags: [],
     },
   });
