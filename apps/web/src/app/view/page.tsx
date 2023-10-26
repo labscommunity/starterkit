@@ -2,7 +2,7 @@
 
 import { AssetCard } from "@/components/asset-card";
 import { useUser } from "@/hooks/useUser";
-import { getAssetData } from "@/lib/query";
+import { getAssetData } from "@/lib/query-assets";
 import { QueriedAsset } from "@/types/query";
 import * as React from "react";
 

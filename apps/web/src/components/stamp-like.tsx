@@ -33,8 +33,8 @@ export function Stamp(props: StampProps) {
     if (!hasStamped) {
       await stamps.stamp(props.txId, 0, []);
       const newCount = stampCount + 1;
-      // setStampCount(newCount);
-      // setHasStamped(true);
+      setStampCount(newCount);
+      setHasStamped(true);
     }
   };
 

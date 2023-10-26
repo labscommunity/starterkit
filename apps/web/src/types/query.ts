@@ -11,3 +11,9 @@ export type Tag = {
   name: string;
   value: string;
 };
+
+export interface QueriedComment {
+  id: string;
+  comment: any;
+  creatorId: string;
+}

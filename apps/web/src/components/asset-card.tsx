@@ -12,6 +12,7 @@ import { QueriedAsset } from "@/types/query";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Stamp } from "@/components/stamp-like";
+import { CommentDialog } from "@/components/comment";
 
 type ImageLoaderProps = {
   src: string;
@@ -42,8 +43,9 @@ export function AssetCard(props: QueriedAsset) {
       </CardContent>
       <CardFooter>
         <div className="flex flex-col gap-2">
-          <div>
+          <div className="flex gap-4">
             <Stamp txId={props.id} />
+            <CommentDialog txId={props.id} />
           </div>
           <p className="text-sm">{props.description}</p>
           <div className="grid grid-flow-row grid-cols-1 md:grid-cols-[auto-fill] gap-2">

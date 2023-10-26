@@ -109,8 +109,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2(react-hook-form@7.47.0)
       '@permaweb/stampjs':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.5.7
+        version: 0.5.7
       '@radix-ui/react-aspect-ratio':
         specifier: ^1.0.3
         version: 1.0.3(@types/react-dom@18.2.14)(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
@@ -3326,8 +3326,8 @@ packages:
     dev: false
     optional: true
 
-  /@permaweb/stampjs@0.6.0:
-    resolution: {integrity: sha512-SoOGGFbALtFAx4kOPawt9s2rzhSQOSiHCOlnzTI+jdwrugMhig52CuiAefjJdrfLdKgKaX37S7Xfd7tQPabY1Q==}
+  /@permaweb/stampjs@0.5.7:
+    resolution: {integrity: sha512-A/NUVl7QqlIiNsO2Mu5PSNk6Fzb+8so6oQCYLJ5Soeu0KoP+N69q4uTgumlrnPEN25W1Y8YVBuebo6QU793Ucg==}
     dependencies:
       ar-gql: 1.2.4
       ramda: 0.29.1
