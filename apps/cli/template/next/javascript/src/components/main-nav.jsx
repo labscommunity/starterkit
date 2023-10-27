@@ -1,13 +1,13 @@
 import * as React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "./mobile-nav";
 
 export function MainNav({ items, children }) {
-  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   return (
@@ -26,9 +26,7 @@ export function MainNav({ items, children }) {
                   href={item.href}
                   className={cn(
                     "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    item.href.startsWith(`/${segment}`) || (!segment && item.href === "/")
-                      ? "text-foreground"
-                      : "text-foreground/60",
+                    pathname === item.href ? "text-foreground" : "text-foreground/60",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >
