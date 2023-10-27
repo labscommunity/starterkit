@@ -379,7 +379,7 @@ export function InputForm() {
         >
           {connected ? (
             isLoading ? (
-              <Spinner size={7} />
+              <Spinner size={28} />
             ) : (
               "Upload Image"
             )
