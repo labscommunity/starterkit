@@ -1,10 +1,9 @@
-"use client";
-
-import Link from "next/link";
-
-import { siteConfig } from "@/config/site";
-import { buttonVariants } from "@/components/ui/button";
 import { InputForm } from "@/components/input-form";
+import { siteConfig } from "@/config/site";
+
+export const metadata = {
+  title: `Home - ${siteConfig.name}`,
+};
 
 export default function IndexPage() {
   return (
@@ -19,24 +18,6 @@ export default function IndexPage() {
           </p>
         </div>
         <InputForm />
-        {/* <div className="flex gap-4">
-          <Link
-            href={siteConfig.links.docs}
-            target="_blank"
-            rel="noreferrer"
-            className={buttonVariants()}
-          >
-            Documentation
-          </Link>
-          <Link
-            target="_blank"
-            rel="noreferrer"
-            href={siteConfig.links.github}
-            className={buttonVariants({ variant: "outline" })}
-          >
-            GitHub
-          </Link>
-        </div> */}
       </section>
     </div>
   );

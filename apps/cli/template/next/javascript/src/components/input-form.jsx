@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,8 +13,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { postAsset } from "@/lib/post";
-import { useActiveAddress, useConnection } from "arweave-wallet-kit";
 import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useUser } from "@/hooks/useUser";
+import { Spinner } from "@/components/spinner";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+} from "@/components/ui/select";
+import Link from "next/link";
 
 // Accepted MIME types
 const ACCEPTED_IMAGE_TYPES = ["image/gif", "image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -27,6 +41,8 @@ const formSchema = z.object({
   title: z.string(),
   creatorName: z.string().optional(),
   description: z.string().optional(),
+  license: z.string().optional(),
+  payment: z.string().optional(),
   tags: z
     .array(
       z.object({
@@ -38,7 +54,9 @@ const formSchema = z.object({
 });
 
 export function InputForm() {
+  const { connected, address: activeAddress } = useUser();
   const [preview, setPreview] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // defining form based on zod schema
   const form = useForm({
@@ -47,8 +65,9 @@ export function InputForm() {
       title: "",
       creatorName: "",
       description: "",
+      license: "default",
+      payment: "",
       tags: [],
-      // license: "",
     },
   });
 
@@ -57,25 +76,36 @@ export function InputForm() {
     control: form.control,
   });
 
-  const { connected } = useConnection();
-  const activeAddress = useActiveAddress();
-
   const { toast } = useToast();
 
   async function onSubmit(values) {
     // This will be type-safe and validated.
+    setIsLoading(true);
     try {
       const transactionId = await postAsset({
         file: values.image,
         title: values.title,
         description: values.description || "",
+        license: values.license || "default",
+        payment: values.payment || "",
         tags: values.tags || [],
         creatorName: values.creatorName || "",
         creatorId: activeAddress || "",
       });
       toast({
         title: "Success!",
-        description: `View transaction at https://g8way.io/${transactionId}`,
+        description: `Atomic asset uploaded!`,
+        action: (
+          <ToastAction
+            altText="View Transaction"
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(`https://ar-io.dev/${transactionId}`, "_blank");
+            }}
+          >
+            View Transaction
+          </ToastAction>
+        ),
       });
     } catch (error) {
       console.log(error);
@@ -84,6 +114,8 @@ export function InputForm() {
         description: error.message || "Unknown Error",
       });
       throw error;
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -92,7 +124,10 @@ export function InputForm() {
       form.reset();
       setPreview("");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.formState, form.reset]);
+
+  const licenseValue = form.watch("license");
 
   return (
     <Form {...form}>
@@ -144,7 +179,6 @@ export function InputForm() {
             }}
           />
         )}
-
         <div className="flex flex-col md:flex-row w-full gap-5">
           <div className="w-full md:w-1/2 space-y-5">
             <FormField
@@ -169,7 +203,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>Creator</FormLabel>
                   <FormControl>
-                    <Input placeholder="creatorName" {...field} />
+                    <Input placeholder="creator name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -189,7 +223,68 @@ export function InputForm() {
               )}
             />
           </div>
-          <div className="flex flex-col gap-4 flex-1">
+          <div className="flex flex-col gap-4 flex-1 w-full">
+            <div className="flex lg:flex-row flex-col gap-4">
+              <FormField
+                control={form.control}
+                name="license"
+                render={({ field }) => (
+                  <FormItem className="w-full lg:w-1/2">
+                    <FormLabel>License</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <SelectTrigger className={cn("w-full p-2")}>
+                          <SelectValue placeholder="Choose License" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectLabel>License Options</SelectLabel>
+                            <SelectItem value="default">UDL Default Public Use</SelectItem>
+                            <SelectItem value="access">UDL Restricted Access</SelectItem>
+                            <SelectItem value="commercial">UDL Commercial Use - One Time Payment</SelectItem>
+                            <SelectItem value="derivative">UDL Derivative Works - One Time Payment</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="payment"
+                render={({ field }) => (
+                  <FormItem className="w-full lg:w-1/2">
+                    <FormLabel>
+                      Payment {licenseValue === "default" ? null : <span className="text-red-500">*</span>}
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="License Fee in AR"
+                        {...field}
+                        disabled={licenseValue === "default"}
+                        required={licenseValue !== "default"}
+                        className={cn("w-full py-2")}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Payment option disabled if License is &quot;UDL Default Public Use&quot;. For more advanced Licenses read
+              this{" "}
+              <Link
+                href="https://arwiki.wiki/#/en/Universal-Data-License-How-to-use-it"
+                target="_blank"
+                className="underline"
+              >
+                wiki
+              </Link>
+              .
+            </p>
             {fields.map((field, index) => (
               <FormField
                 control={form.control}
@@ -226,8 +321,8 @@ export function InputForm() {
             </Button>
           </div>
         </div>
-        <Button type="submit" className={buttonVariants()}>
-          Upload Image
+        <Button type="submit" className={buttonVariants()} disabled={!connected}>
+          {connected ? isLoading ? <Spinner size={28} /> : "Upload Image" : "Please connect to upload an asset."}
         </Button>
       </form>
     </Form>

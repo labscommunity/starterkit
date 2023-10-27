@@ -1,15 +1,7 @@
-export interface Comment {
-  comment: string;
-  username: string;
-  id: string;
-}
-
 export interface State {
   balances: { [address: string]: number };
   ticker: string;
   owner: string;
-  comments: Comment[];
-  likes: { [address: string]: boolean };
 }
 
 export interface Action {
@@ -47,9 +39,4 @@ export interface BalanceResult {
 
 export interface OwnerResult {
   result: string;
-}
-
-export interface AddCommentInput {
-  function: "addComment";
-  txnData: Omit<Comment, "id">;
 }

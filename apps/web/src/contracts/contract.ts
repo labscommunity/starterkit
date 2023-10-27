@@ -1,6 +1,5 @@
 import { balance } from "./actions/balance";
 import { owner } from "./actions/owner";
-import { addComment, likePost } from "./actions/post";
 import { transfer } from "./actions/transfer";
 import { Action, State } from "./types";
 
@@ -16,10 +15,6 @@ export async function handle(state: State, action: Action) {
       return balance(state, action);
     case "transfer":
       return transfer(state, action);
-    case "addComment":
-      return addComment(state, action);
-    case "likePost":
-      return likePost(state, action);
     default:
       throw new ContractError(
         `No function supplied or function not recognized: "${input.function}"`

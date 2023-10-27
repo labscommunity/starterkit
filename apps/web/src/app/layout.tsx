@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ArweaveWalletKit } from "arweave-wallet-kit";
+import { UserProvider } from "../hooks/useUser";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -59,13 +60,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 },
               }}
             >
-              <div className="relative flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-                <Toaster />
-                <Footer />
-              </div>
-              <TailwindIndicator />
+              <UserProvider>
+                <div className="relative flex min-h-screen flex-col">
+                  <SiteHeader />
+                  <div className="flex-1">{children}</div>
+                  <Toaster />
+                  <Footer />
+                </div>
+                <TailwindIndicator />
+              </UserProvider>
             </ArweaveWalletKit>
           </ThemeProvider>
         </body>
