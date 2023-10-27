@@ -30,19 +30,27 @@ edges {
 `;
 
   const response = await queryAllTransactionsGQL(query, {
-    gateway: "ar-io.dev",
+    gateway: "arweave.net",
     filters: {},
   });
+
+  const textDecoder = new TextDecoder();
+
   const commentsList = await Promise.all(
     response.map(async (edges) => {
-      const comment = await getTransaction({
-        transactionId: edges.node.id,
-        environment: "mainnet",
-      });
-
+      let comment = "";
+      try {
+        const commentTransaction = await getTransaction({
+          transactionId: edges.node.id,
+          environment: "mainnet",
+        });
+        comment = textDecoder.decode(commentTransaction.data);
+      } catch {
+        comment = await (await fetch(`https://ar-io.dev/${edges.node.id}`)).text();
+      }
       return {
         id: edges.node.id,
-        comment: new TextDecoder().decode(comment.data),
+        comment,
         creatorId: edges.node.owner.address,
       };
     })

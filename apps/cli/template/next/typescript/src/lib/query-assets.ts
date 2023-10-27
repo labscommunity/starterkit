@@ -6,7 +6,7 @@ import { queryAllTransactionsGQL } from "arweavekit/graphql";
 // function to fetch posts create from defined contract source
 export async function getAssetData(): Promise<any> {
   const response = await queryAllTransactionsGQL(query, {
-    gateway: "ar-io.dev",
+    gateway: "arweave.net",
     filters: {},
   });
 

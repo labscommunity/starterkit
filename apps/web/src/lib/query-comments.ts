@@ -31,7 +31,7 @@ edges {
 `;
 
   const response = await queryAllTransactionsGQL(query, {
-    gateway: "ar-io.dev",
+    gateway: "arweave.net",
     filters: {},
   });
 
