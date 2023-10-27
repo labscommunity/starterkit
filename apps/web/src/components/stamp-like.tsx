@@ -80,9 +80,11 @@ export function Stamp(props: StampProps) {
             Please connect to app before liking.
           </div>
         ) : (
-          hasStamped && (
-            <div className="text-center">You have already liked this post.</div>
-          )
+          <div className="text-center">
+            {hasStamped
+              ? "You have already liked this post."
+              : "You haven't liked this post yet!"}
+          </div>
         )}
       </HoverCardContent>
     </HoverCard>
