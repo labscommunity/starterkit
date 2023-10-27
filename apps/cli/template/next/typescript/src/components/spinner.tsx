@@ -5,6 +5,6 @@ type SpinnerProps = {
 };
 
 export function Spinner(props: SpinnerProps) {
-  const size = props.size || 6;
-  return <Loader2 className={`h-${size} w-${size} animate-spin`} />;
+  const size = props.size || 28;
+  return <Loader2 height={size} width={size} className={`animate-spin`} />;
 }

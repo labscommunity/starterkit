@@ -223,17 +223,17 @@ export function InputForm() {
               )}
             />
           </div>
-          <div className="flex flex-col gap-4 flex-1">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col gap-4 flex-1 w-full">
+            <div className="flex lg:flex-row flex-col gap-4">
               <FormField
                 control={form.control}
                 name="license"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full lg:w-1/2">
                     <FormLabel>License</FormLabel>
                     <FormControl>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <SelectTrigger className={cn("w-full lg:p-0 p-6")}>
+                        <SelectTrigger className={cn("w-full p-2")}>
                           <SelectValue placeholder="Choose License" />
                         </SelectTrigger>
                         <SelectContent>
@@ -255,7 +255,7 @@ export function InputForm() {
                 control={form.control}
                 name="payment"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="w-full lg:w-1/2">
                     <FormLabel>
                       Payment {licenseValue === "default" ? null : <span className="text-red-500">*</span>}
                     </FormLabel>
@@ -265,7 +265,7 @@ export function InputForm() {
                         {...field}
                         disabled={licenseValue === "default"}
                         required={licenseValue !== "default"}
-                        className={cn("w-full lg:py-0 py-6")}
+                        className={cn("w-full py-2")}
                       />
                     </FormControl>
                     <FormMessage />
@@ -322,7 +322,7 @@ export function InputForm() {
           </div>
         </div>
         <Button type="submit" className={buttonVariants()} disabled={!connected}>
-          {connected ? isLoading ? <Spinner size={7} /> : "Upload Image" : "Please connect to upload an asset."}
+          {connected ? isLoading ? <Spinner size={28} /> : "Upload Image" : "Please connect to upload an asset."}
         </Button>
       </form>
     </Form>

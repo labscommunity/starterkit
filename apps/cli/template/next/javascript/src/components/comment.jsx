@@ -30,6 +30,7 @@ export function CommentDialog(props) {
   const { address } = useUser();
   const [comments, setComments] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isCommentsLoading, setIsCommentsLoading] = React.useState(false);
   const { toast } = useToast();
 
   const form = useForm({
@@ -84,10 +85,17 @@ export function CommentDialog(props) {
   }
 
   const fetchCommentData = async () => {
-    const comments = await getComments(props.txId);
-    console.log(comments);
+    setIsCommentsLoading(true);
+    try {
+      const comments = await getComments(props.txId);
+      console.log(comments);
 
-    setComments(comments);
+      setComments(comments);
+    } catch {
+      console.log("Error fetching comments");
+    } finally {
+      setIsCommentsLoading(false);
+    }
   };
 
   function trimAddress(str, startLength = 4, endLength = 3) {
@@ -122,12 +130,20 @@ export function CommentDialog(props) {
         </DialogHeader>
 
         <ScrollArea className="h-36 rounded-md border p-4">
-          {comments.map((comment, index) => (
-            <div key={index} className="p-2 border-b">
-              <strong>{trimAddress(comment.creatorId)}</strong>
-              <p>{comment.comment}</p>
+          {isCommentsLoading ? (
+            <div className="flex justify-center items-center h-full">
+              <Spinner size={28} />
             </div>
-          ))}
+          ) : comments.length > 0 ? (
+            comments.map((comment, index) => (
+              <div key={index} className="p-2 border-b">
+                <strong>{trimAddress(comment.creatorId)}</strong>
+                <p>{comment.comment}</p>
+              </div>
+            ))
+          ) : (
+            <div className="flex justify-center items-center h-full">No comments yet!</div>
+          )}
         </ScrollArea>
 
         <Form {...form}>
