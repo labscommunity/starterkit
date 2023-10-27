@@ -1,23 +1,12 @@
-import figlet from "figlet";
-import { CLI_NAME } from "@/constants.js";
-import gradient from "gradient-string";
+import { TITLE_TEXT } from "@/constants.js";
+import { getUserPkgManager } from "./getUserPkgManager.js";
+import chalk from "chalk";
 
-const colors = ["red", "yellow", "green", "blue", "purple"];
-
-export const renderTitle = async () => {
-  return new Promise<void>((resolve) => {
-    figlet(
-      CLI_NAME.replace(new RegExp("-", "g"), " ").toUpperCase(),
-      {
-        font: "Standard",
-        horizontalLayout: "fitted",
-      },
-      (err: unknown, data: unknown) => {
-        const sKgradient = gradient(colors);
-
-        console.log(sKgradient.multiline((err ? CLI_NAME : data) as string));
-        resolve();
-      }
-    );
-  });
+export const renderTitle = () => {
+  // resolves weird behavior where the ascii is offset
+  const pkgManager = getUserPkgManager();
+  if (pkgManager === "yarn" || pkgManager === "pnpm") {
+    console.log("");
+  }
+  console.log(chalk.blue(TITLE_TEXT));
 };

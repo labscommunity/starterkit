@@ -104,6 +104,9 @@ export async function convertTsxToJsx(srcDir, destDir) {
   fs.emptyDirSync(TYPESCRIPT_DIR);
   fs.emptyDirSync(COMMON_DIR);
 
+  // Remove .next directory if exists
+  fs.removeSync(path.join(WEB_DIR, ".next"));
+
   // Copy files from web app to typescript and common directories
   for (const { src, dst, rename } of filesToCopy) {
     const srcPath = path.join(WEB_DIR, src);

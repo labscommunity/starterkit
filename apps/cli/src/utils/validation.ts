@@ -20,7 +20,7 @@ export const validateAppName = (rawInput: string) => {
     return;
   } else {
     const errors = [...(nameValidation.errors || []), ...(nameValidation.warnings || [])];
-    return errors.map((error) => `* ${error}`).join("\n");
+    return errors.join("\n");
   }
 };
 
