@@ -21,10 +21,12 @@ type ImageLoaderProps = {
   quality?: number;
 };
 
+// Custom loader to render image source's directly from Arweave gateways
 const imageLoader = ({ src, width, quality }: ImageLoaderProps): string => {
   return `https://ar-io.dev/${src}?w=${width}&q=${quality || 75}`;
 };
 
+// Component template to render assets and other metadata
 export function AssetCard(props: QueriedAsset) {
   return (
     <Card className="w-full">

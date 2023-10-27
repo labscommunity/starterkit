@@ -12,6 +12,8 @@ import {
 import { useUser } from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
 
+// Using Stamp Protocol for on-chain likes
+// Learn more on Stamping https://stamps.arweave.dev/#/en/main
 let stampInstance: StampJS;
 
 async function getStamps() {

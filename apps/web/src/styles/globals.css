@@ -81,7 +81,3 @@
       "calt" 1;
   }
 }
-
-.grid-auto-fit {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}

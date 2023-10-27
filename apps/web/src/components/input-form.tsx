@@ -67,7 +67,6 @@ const formSchema = z.object({
       })
     )
     .optional(),
-  // license: z.string().optional(),
 });
 
 type InputFormValues = z.infer<typeof formSchema>;
@@ -77,7 +76,9 @@ export function InputForm() {
   const [preview, setPreview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // defining form based on zod schema
+  // Defining form based on zod schema and useForm hooks
+  // Learn more on zod https://zod.dev/
+  // Learn more on useForm https://react-hook-form.com/docs/useform
   const form = useForm<InputFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {

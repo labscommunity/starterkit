@@ -45,6 +45,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {/* Wrapping app in ArweaveWalletKit Provider to have access to connection utility */}
+            {/* Read more at  https://docs.arweavekit.com/wallets/wallet-kit */}
             <ArweaveWalletKit
               config={{
                 permissions: [
@@ -60,6 +62,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 },
               }}
             >
+              {/* Wrapping app in UserProvider for global context on connected user */}
               <UserProvider>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />

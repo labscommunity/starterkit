@@ -17,6 +17,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   );
 };
 
+// Custom hook to use User global context
 export const useUser = (): User => {
   const context = useContext(UserContext);
   if (!context) {

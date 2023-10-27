@@ -51,6 +51,8 @@ export function CommentDialog(props: CommentFormProps) {
     resolver: zodResolver(commentSchema),
   });
 
+  // On-chain Comments using Arweave ANS-114
+  // Read more on https://specs.ar-io.dev/#/view/SYCrxZYzhP_L_iwmxS7niejyeJ_XhJtN4EArplCPHGQ
   async function onSubmit(values: CommentFormValues): Promise<void> {
     setIsLoading(true);
     try {
