@@ -4,7 +4,7 @@ Fast track your journey to building decentralized applications on Arweave with `
 
 ## Getting Started
 
-First, run the development server and choose your preferred configurations:
+First, run the development:
 
 ```bash
 npm run dev
