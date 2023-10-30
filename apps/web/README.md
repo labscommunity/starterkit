@@ -48,6 +48,6 @@ The true strength of this kit lies in its modularity. Simply interchange the cor
 
 ## Start Building
 
-Ready to build your first application on Arweave? [Get started now!](/README.md#getting-started)
+Ready to build your first application on Arweave? [Get started now!](https://github.com/labscommunity/starterkit/blob/main/apps/cli/README.md)
 
 Checkout the [ArweaveKit docs](https://docs.arweavekit.com/arweavekit/introduction?utm_source=Github&utm_medium=StarterKit+Repo&utm_campaign=Create-Arweave-App+StarterKit+Docs&utm_id=Create-Arweave-App+StarterKit+Docs) to customize the application and add more features and follow us on [X](https://twitter.com/CommunityLabs) to stay updated on all things Arweave.
