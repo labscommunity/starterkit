@@ -20,31 +20,34 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the r
 
 **Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
 
-![Landing Page Form Preview](landing-preview.png)
+![Landing Page Form Preview](/apps/web/public/landing-preview.png)
 
 **View Page:** A dedicated space to view the uploaded assets and engage with them through on-chain likes (known as stamps) and comments.
 
-![View Page Preview](view-preview.png)
+![View Page Preview](/apps/web/public/view-preview.png)
 
 Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
 
-## Why is use a StarterKit?
+## Why use a StarterKit?
 
 Building DApps from scratch can be a daunting task. From setting up the environment to ensuring compatibility across different components, the process can be time-consuming. A scaffold provides a pre-configured foundation, enabling developers to focus on building unique features and functionalities rather than the underlying setup.
 
-## Learn More
+## What are the key components of the StarterKit?
 
-To learn more about [create-arweave-app](https://github.com/labscommunity/starterkit/blob/main/apps/cli/README.md), take a look at the following resources:
+- **Navbar:** A built-in navigation bar that integrates with [Arweave Wallet Kit](https://docs.arweavekit.com/wallets/wallet-kit?utm_source=Github&utm_medium=StarterKit+Repo&utm_campaign=Create-Arweave-App+StarterKit+Docs&utm_id=Create-Arweave-App+StarterKit+Docs), enabling users to connect to and interact with the DApp effortlessly.
 
-- [Documentation](https://github.com/labscommunity/starterkit/blob/main/apps/cli/README.md)
+- **Landing Page:** A landing page featuring a form, typesafed with [Zod](https://zod.dev/) schemas. Users can upload images and add metadata, which is then posted to the Arweave network as an [atomic asset](https://cookbook.arweave.dev/concepts/atomic-tokens.html).
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs.
+- **Atomic Assets and Contracts:** Each asset is paired with an associated contract, enabling alterations to the metadata and transfer of ownership.
 
-- [Next.js](https://nextjs.org)
-- [ArweaveKit](https://docs.arweavekit.com/arweavekit/introduction)
-- [Arweave Wallet Kit](https://docs.arweavekit.com/wallets/wallet-kit)
-- [Warp Contracts](https://docs.warp.cc/docs/sdk/overview)
-- [Stamp Protocol](https://github.com/stamp-association/stamp/tree/main/packages/stampjs)
-- [Shadcn UI](https://ui.shadcn.com/docs)
+- **View Page:** A space to showcase assets and metadata, augmented with features like [Stamps](https://stamps.arweave.dev/#/en/main) (Arweave's version of 'likes') and [on-chain comments](https://specs.ar-io.dev/#/view/SYCrxZYzhP_L_iwmxS7niejyeJ_XhJtN4EArplCPHGQ).
 
-You can check out [create-arweave-app GitHub repository](https://github.com/labscommunity/starterkit) - your feedback and contributions are welcome!
+## Leverage Modularity
+
+The true strength of this kit lies in its modularity. Simply interchange the core asset from image to music and transform an image sharing application to a music hub. Or swap in for videos to create a streaming service. As any form of data can be uploaded to the Arweave network, the possibilities are limitless.
+
+## Start Building
+
+Ready to build your first application on Arweave? [Get started now!](/README.md#getting-started)
+
+Checkout the [ArweaveKit docs](https://docs.arweavekit.com/arweavekit/introduction?utm_source=Github&utm_medium=StarterKit+Repo&utm_campaign=Create-Arweave-App+StarterKit+Docs&utm_id=Create-Arweave-App+StarterKit+Docs) to customize the application and add more features and follow us on [X](https://twitter.com/CommunityLabs) to stay updated on all things Arweave.
