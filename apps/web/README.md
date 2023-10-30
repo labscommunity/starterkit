@@ -4,7 +4,7 @@ Fast track your journey to building decentralized applications on Arweave with `
 
 ## Getting Started
 
-First, run the development server:
+First, run the development server and choose your preferred configurations:
 
 ```bash
 npm run dev
@@ -16,9 +16,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx` or `pages/index.ts`.
+**Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
+
+![Landing Page Form Preview](landing-preview.png)
+
+**View Page:** A dedicated space to view the uploaded assets and engage with them through on-chain likes (known as stamps) and comments.
+
+![View Page Preview](view-preview.png)
+
+Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
+
+## Why is use a StarterKit?
+
+Building DApps from scratch can be a daunting task. From setting up the environment to ensuring compatibility across different components, the process can be time-consuming. A scaffold provides a pre-configured foundation, enabling developers to focus on building unique features and functionalities rather than the underlying setup.
 
 ## Learn More
 
