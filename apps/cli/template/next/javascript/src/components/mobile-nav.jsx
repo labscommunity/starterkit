@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useLockBody } from "@/hooks/useLockBody";
 import { Icons } from "@/components/icons";
 
-export function MobileNav({ items, children }) {
+export function MobileNav({ items, children, onLinkClick }) {
   useLockBody();
 
   return (
@@ -28,6 +28,7 @@ export function MobileNav({ items, children }) {
                 "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",
                 item.disabled && "cursor-not-allowed opacity-60"
               )}
+              onClick={onLinkClick}
             >
               {item.title}
             </Link>

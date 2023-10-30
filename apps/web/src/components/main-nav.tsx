@@ -17,6 +17,10 @@ export function MainNav({ items, children }: MainNavProps) {
   const pathname = usePathname();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
+  const handleMobileLinkClick = () => {
+    setShowMobileMenu(false);
+  };
+
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden md:flex items-center space-x-2">
@@ -55,7 +59,9 @@ export function MainNav({ items, children }: MainNavProps) {
         <span className="font-bold">Menu</span>
       </button>
       {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
+        <MobileNav items={items} onLinkClick={handleMobileLinkClick}>
+          {children}
+        </MobileNav>
       )}
     </div>
   );

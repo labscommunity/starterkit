@@ -10,9 +10,10 @@ import { Icons } from "@/components/icons";
 interface MobileNavProps {
   items: NavItem[];
   children?: React.ReactNode;
+  onLinkClick: () => void;
 }
 
-export function MobileNav({ items, children }: MobileNavProps) {
+export function MobileNav({ items, children, onLinkClick }: MobileNavProps) {
   useLockBody();
 
   return (
@@ -35,6 +36,7 @@ export function MobileNav({ items, children }: MobileNavProps) {
                 "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",
                 item.disabled && "cursor-not-allowed opacity-60"
               )}
+              onClick={onLinkClick}
             >
               {item.title}
             </Link>
