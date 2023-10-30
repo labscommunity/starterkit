@@ -91,8 +91,8 @@ bunx create-arweave-app@latest my-arweave-app --noGit --default
 
 ## Credits
 
-For a complete list of contributors and credits, please see the [CREDITS](CREDITS.md) file.
+For a complete list of contributors and credits, please see the [CREDITS](https://github.com/labscommunity/starterkit/blob/main/CREDITS.md) file.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://github.com/labscommunity/starterkit/blob/main/LICENSE).
