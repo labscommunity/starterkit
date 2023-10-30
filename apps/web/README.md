@@ -1,6 +1,6 @@
-# StarterKit
+# Arweave StarterKit
 
-This is an Arweave Next.js project bootstrapped with [`create-arweave-app`](https://github.com/labscommunity/starterkit/tree/main/apps/cli).
+Fast track your journey to building decentralized applications on Arweave with `create-arweave-app`. This CLI tool effortlessly sets up an entire application, harnessing the power of [NextJS](https://nextjs.org/) as the framework, [Shadcn UI](https://ui.shadcn.com/) for a sleek and aesthetic interface, and [ArweaveKit](https://arweavekit.com/?utm_source=Github&utm_medium=StarterKit+Repo&utm_campaign=Create-Arweave-App+StarterKit+Docs&utm_id=Create-Arweave-App+StarterKit+Docs) to seamlessly interact with the Arweave ecosystem.
 
 ## Getting Started
 
