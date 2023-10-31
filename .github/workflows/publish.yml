@@ -22,7 +22,7 @@ jobs:
           node-version: 18.x
           cache: "pnpm"
 
-      - name: Install NPM Dependencies
+      - name: Install PNPM Dependencies
         run: pnpm install --no-frozen-lockfile
 
       - name: Build the package
