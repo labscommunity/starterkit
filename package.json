@@ -23,6 +23,9 @@
     "prettier": "^3.0.3",
     "turbo": "latest"
   },
+  "resolutions": {
+    "avsc": "github:Irys-xyz/avsc#a730cc8018b79e114b6a3381bbb57760a24c6cef"
+  },
   "packageManager": "pnpm@8.6.10",
   "name": "starterkit"
 }

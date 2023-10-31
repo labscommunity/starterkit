@@ -32,6 +32,8 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
           version: .github/update-lock.sh
           publish: npx changeset publish
         env:
