@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+
+/**
+ * This CLI integrates contributions and portions of code sourced from various repositories.
+ * For a complete list of contributions and credits, please see https://github.com/labscommunity/starterkit/blob/main/CREDITS.md.
+ */
+
 import path from "path";
 import { execa } from "execa";
 import fs from "fs-extra";
