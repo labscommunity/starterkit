@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <ArweaveWalletKit
         config={{
-          permissions: ["ACCESS_ADDRESS", "SIGN_TRANSACTION", "DISPATCH", "ACCESS_PUBLIC_KEY", "SIGNATURE"],
+          permissions: ["ACCESS_ADDRESS", "SIGN_TRANSACTION", "DISPATCH"],
           ensurePermissions: true,
           appInfo: {
             name: "StarterKit",
