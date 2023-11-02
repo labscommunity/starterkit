@@ -7,7 +7,6 @@ import { QueriedAsset } from "@/types/query";
 import * as React from "react";
 
 export function Assets() {
-  const { connected, address } = useUser();
   const [assets, setAssets] = React.useState<QueriedAsset[]>([]);
 
   React.useEffect(() => {
@@ -16,7 +15,7 @@ export function Assets() {
       setAssets(data);
     }
     fetchData();
-  }, [connected, address]);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-6">

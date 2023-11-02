@@ -1,12 +1,10 @@
 "use client";
 
 import { AssetCard } from "@/components/asset-card";
-import { useUser } from "@/hooks/useUser";
 import { getAssetData } from "@/lib/query-assets";
 import * as React from "react";
 
 export function Assets() {
-  const { connected, address } = useUser();
   const [assets, setAssets] = React.useState([]);
 
   React.useEffect(() => {
@@ -15,7 +13,7 @@ export function Assets() {
       setAssets(data);
     }
     fetchData();
-  }, [connected, address]);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-6">
