@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import { execa, type StdioOption } from "execa";
 import ora, { type Ora } from "ora";
+import path from "path";
+import fs from "fs-extra";
 
 import { getUserPkgManager, type PackageManager } from "@/utils/getUserPkgManager.js";
 import { logger } from "@/utils/logger.js";
@@ -70,7 +72,19 @@ export const installDependencies = async ({ projectDir }: { projectDir: string }
 
   const installSpinner = await runInstallCommand(pkgManager, projectDir);
 
-  // If the spinner was used to show the progress, use succeed method on it
-  // If not, use the succeed on a new spinner
-  (installSpinner ?? ora()).succeed(chalk.green("Successfully installed dependencies!\n"));
+  const isDependenciesInstalled = fs.existsSync(path.join(projectDir, "node_modules"));
+  if (isDependenciesInstalled) {
+    // If the spinner was used to show the progress, use succeed method on it
+    // If not, use the succeed on a new spinner
+    (installSpinner ?? ora()).succeed(chalk.green("Successfully installed dependencies!\n"));
+    return false;
+  } else {
+    (installSpinner ?? ora()).fail(
+      chalk.red(
+        "Failed to install dependencies! Please refer to https://github.com/labscommunity/starterkit#getting-started for troubleshooting steps to resolve this issue.\n"
+      )
+    );
+
+    return true;
+  }
 };
