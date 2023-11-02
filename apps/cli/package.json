@@ -64,9 +64,7 @@
     "validate-npm-package-name": "^5.0.0"
   },
   "devDependencies": {
-    "@types/figlet": "^1.5.7",
     "@types/fs-extra": "^11.0.1",
-    "@types/inquirer": "^9.0.3",
     "@types/node": "^18.16.0",
     "@types/validate-npm-package-name": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
