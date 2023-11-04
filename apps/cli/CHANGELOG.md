@@ -1,5 +1,17 @@
 # create-arweave-app
 
+## 0.1.1
+
+### Patch Changes
+
+- [#12](https://github.com/labscommunity/starterkit/pull/12) [`50beed6`](https://github.com/labscommunity/starterkit/commit/50beed6e99e9fb4046fd325b20b1d07a7da631d6) Thanks [@pawanpaudel93](https://github.com/pawanpaudel93)! - Changeset config, CLI dependency and template issue fixes
+
+  - Fixed changeset configuration.
+  - Added credits comment to CLI code.
+  - Improved dependency handling and logging.
+  - Resolved `hasStamped` fetching issue in template.
+  - Enhanced asset fetching without dependencies in template.
+
 ## 0.1.0
 
 ### Minor Changes
