@@ -64,3 +64,6 @@ Thumbs.db
 
 # Typescript
 *.tsbuildinfo
+
+# cli changesets
+apps/cli/.changeset/*.md

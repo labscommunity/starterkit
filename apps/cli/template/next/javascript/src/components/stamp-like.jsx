@@ -23,7 +23,7 @@ async function getStamps() {
 }
 
 export function Stamp(props) {
-  const { connected } = useUser();
+  const { connected, address } = useUser();
   const [stampCount, setStampCount] = React.useState(0);
   const [hasStamped, setHasStamped] = React.useState(false);
 
@@ -41,14 +41,16 @@ export function Stamp(props) {
     async function fetchStampData() {
       const stamps = await getStamps();
       const { total } = await stamps.count(props.txId);
-      const stampedStatus = await stamps.hasStamped(props.txId);
-
       setStampCount(total);
-      setHasStamped(stampedStatus);
+
+      if (address) {
+        const stampedStatus = await stamps.hasStamped(props.txId);
+        setHasStamped(stampedStatus);
+      }
     }
 
     fetchStampData();
-  }, [props.txId]);
+  }, [props.txId, address]);
 
   return (
     <HoverCard>
@@ -59,7 +61,7 @@ export function Stamp(props) {
           disabled={!connected || hasStamped}
           className={`
             transition 
-            ${hasStamped ? "text-red-500" : ""}
+            ${hasStamped && connected ? "text-red-500" : ""}
             ${!hasStamped && connected ? "hover:text-red-500" : ""}
           `}
         >

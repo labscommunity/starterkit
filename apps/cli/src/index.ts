@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+
+/**
+ * This CLI integrates contributions and portions of code sourced from various repositories.
+ * For a complete list of contributions and credits, please see https://github.com/labscommunity/starterkit/blob/main/CREDITS.md.
+ */
+
 import path from "path";
 import { execa } from "execa";
 import fs from "fs-extra";
@@ -79,8 +85,9 @@ const main = async () => {
     setImportAlias(projectDir, importAlias);
   }
 
+  let showInstallCommand = noInstall;
   if (!noInstall) {
-    await installDependencies({ projectDir });
+    showInstallCommand = await installDependencies({ projectDir });
   }
 
   // Rename _eslintrc.json to .eslintrc.json - we use _eslintrc.json to avoid conflicts with the monorepos linter
@@ -92,7 +99,7 @@ const main = async () => {
 
   await logNextSteps({
     projectName: appDir,
-    noInstall,
+    noInstall: showInstallCommand,
     projectDir,
   });
 
