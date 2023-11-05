@@ -38,6 +38,8 @@ bun create arweave-app@latest
 
 During the interactive setup, you'll be prompted for your project's name and other configuration options. Provide your choices to create a new Arweave application.
 
+> If using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
+
 ### Non-interactive
 
 For a non-interactive setup, use command line arguments. You can view available options with:
