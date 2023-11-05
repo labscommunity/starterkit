@@ -113,11 +113,11 @@ After creating a new project and installing the dependencies, open [http://local
 
 **Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
 
-![Landing Page Form Preview](/apps/web/public/landing-preview.png)
+![Landing Page Form Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/view-preview.png)
 
 **View Page:** A dedicated space to view the uploaded assets and engage with them through on-chain likes (known as stamps) and comments.
 
-![View Page Preview](/apps/web/public/landing-preview.png)
+![View Page Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/landing-preview.png)
 
 Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
 
