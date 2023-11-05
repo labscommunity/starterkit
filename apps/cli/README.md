@@ -38,7 +38,7 @@ bun create arweave-app@latest
 
 During the interactive setup, you'll be prompted for your project's name and other configuration options. Provide your choices to create a new Arweave application.
 
-> If using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
+> Note: For windows users using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
 
 ### Non-interactive
 
@@ -90,6 +90,8 @@ pnpm create arweave-app@latest my-arweave-app --noGit --default
 # or
 bunx create-arweave-app@latest my-arweave-app --noGit --default
 ```
+
+> Note: For windows users using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
 
 ## Getting Started
 
