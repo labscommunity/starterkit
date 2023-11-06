@@ -1,5 +1,13 @@
 # create-arweave-app
 
+## 0.1.2
+
+### Patch Changes
+
+- [#14](https://github.com/labscommunity/starterkit/pull/14) [`ee63f6f`](https://github.com/labscommunity/starterkit/commit/ee63f6f68afb12c814ad548fc328a52f0eb03d3b) Thanks [@ropats16](https://github.com/ropats16)! - Update CLI README for error handling
+
+  - Support for Windows users using secure shells.
+
 ## 0.1.1
 
 ### Patch Changes
