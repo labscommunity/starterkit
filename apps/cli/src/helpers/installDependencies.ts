@@ -81,7 +81,7 @@ export const installDependencies = async ({ projectDir }: { projectDir: string }
   } else {
     (installSpinner ?? ora()).fail(
       chalk.red(
-        "Failed to install dependencies! Please refer to https://github.com/labscommunity/starterkit#getting-started for troubleshooting steps to resolve this issue.\n"
+        "Failed to install dependencies! Please refer to https://github.com/labscommunity/starterkit#usage for troubleshooting steps to resolve this issue.\n"
       )
     );
 
