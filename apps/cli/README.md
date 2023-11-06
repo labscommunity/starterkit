@@ -38,7 +38,7 @@ bun create arweave-app@latest
 
 During the interactive setup, you'll be prompted for your project's name and other configuration options. Provide your choices to create a new Arweave application.
 
-> Note: For windows users using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
+> **Note:** For windows users using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
 
 ### Non-interactive
 
@@ -91,8 +91,6 @@ pnpm create arweave-app@latest my-arweave-app --noGit --default
 bunx create-arweave-app@latest my-arweave-app --noGit --default
 ```
 
-> Note: For windows users using a secure shell, ensure your ssh-agent is running as expected for successfull installation of dependencies.
-
 ## Getting Started
 
 First, run the development:
@@ -113,11 +111,11 @@ After creating a new project and installing the dependencies, open [http://local
 
 **Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
 
-![Landing Page Form Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/view-preview.png)
+![Landing Page Form Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/landing-preview.png)
 
 **View Page:** A dedicated space to view the uploaded assets and engage with them through on-chain likes (known as stamps) and comments.
 
-![View Page Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/landing-preview.png)
+![View Page Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/view-preview.png)
 
 Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
 
