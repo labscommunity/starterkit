@@ -8,12 +8,14 @@ import replace from "replace-in-file";
 import path from "path";
 
 (async () => {
+  // *store with name 'wallet.json' in root direstory of project if needed
+  const walletPath = process.argv[2] ?? "wallet.json";
+
   // intiating new warp instance for mainnet
   const warp = WarpFactory.forMainnet().use(new DeployPlugin());
 
   // read private key file
-  // *store with name 'wallet.json' in root direstory of project if needed
-  const key = JSON.parse(fs.readFileSync("wallet.json").toString());
+  const key = JSON.parse(fs.readFileSync(walletPath).toString());
 
   // get absolute path for project directory
   const __dirname = path.resolve();

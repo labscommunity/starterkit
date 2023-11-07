@@ -93,7 +93,7 @@ bunx create-arweave-app@latest my-arweave-app --noGit --default
 
 ## Getting Started
 
-First, run the development:
+After creating a new project and installing the dependencies, run the development server:
 
 ```bash
 npm run dev
@@ -107,7 +107,7 @@ bun dev
 
 ## Preview
 
-After creating a new project and installing the dependencies, open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 **Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
 
@@ -118,6 +118,44 @@ After creating a new project and installing the dependencies, open [http://local
 ![View Page Preview](https://raw.githubusercontent.com/labscommunity/starterkit/main/apps/web/public/view-preview.png)
 
 Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
+
+## Contract
+
+### Modifying Contract Code
+
+Find the atomic asset contract code in the `src/contracts` directory of the created project. You can make necessary modifications to the codebase according to your needs.
+
+### Deploying Contract Source
+
+To deploy the contract source, follow the commands provided below.
+
+#### With Wallet Keyfile Present at Root
+
+Please ensure that the wallet keyfile `wallet.json` is present at the root of the project.
+
+```bash
+npm run deploy-contracts
+# or
+yarn deploy-contracts
+# or
+pnpm deploy-contracts
+# or
+bun deploy-contracts
+```
+
+#### Without Wallet Keyfile at Root
+
+If the wallet keyfile is not present at the root of the project, you can specify its path while deploying the contracts:
+
+```bash
+npm run deploy-contracts /Users/arweave/Documents/keys/wallet.json
+# or
+yarn deploy-contracts /Users/arweave/Documents/keys/wallet.json
+# or
+pnpm deploy-contracts /Users/arweave/Documents/keys/wallet.json
+# or
+bun deploy-contracts /Users/arweave/Documents/keys/wallet.json
+```
 
 ## Why use a StarterKit?
 
