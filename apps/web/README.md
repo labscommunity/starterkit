@@ -28,44 +28,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the r
 
 Start editing the page by modifying `app/page.tsx` or `pages/index.ts`, as per your NextJS config.
 
-## Contract
-
-### Modifying Contract Code
-
-Find the atomic asset contract code in the `src/contracts` directory. You can make necessary modifications to the codebase according to your needs.
-
-### Deploying Contract Source
-
-To deploy the contract source, follow the commands provided below.
-
-#### With Wallet Keyfile Present at Root
-
-Please ensure that the wallet keyfile `wallet.json` is present at the root of the project.
-
-```bash
-npm run deploy-contracts
-# or
-yarn deploy-contracts
-# or
-pnpm deploy-contracts
-# or
-bun deploy-contracts
-```
-
-#### Without Wallet Keyfile at Root
-
-If the wallet keyfile is not present at the root of the project, you can specify its path while deploying the contracts:
-
-```bash
-npm run deploy-contracts /Users/arweave/Documents/keys/wallet.json
-# or
-yarn deploy-contracts /Users/arweave/Documents/keys/wallet.json
-# or
-pnpm deploy-contracts /Users/arweave/Documents/keys/wallet.json
-# or
-bun deploy-contracts /Users/arweave/Documents/keys/wallet.json
-```
-
 ## Why use a StarterKit?
 
 Building DApps from scratch can be a daunting task. From setting up the environment to ensuring compatibility across different components, the process can be time-consuming. A scaffold provides a pre-configured foundation, enabling developers to focus on building unique features and functionalities rather than the underlying setup.
@@ -77,6 +39,15 @@ Building DApps from scratch can be a daunting task. From setting up the environm
 - **Landing Page:** A landing page featuring a form, typesafed with [Zod](https://zod.dev/) schemas. Users can upload images and add metadata, which is then posted to the Arweave network as an [atomic asset](https://cookbook.arweave.dev/concepts/atomic-tokens.html).
 
 - **Atomic Assets and Contracts:** Each asset is paired with an associated contract, enabling alterations to the metadata and transfer of ownership.
+
+  The created project is initialized with a contract which is located at `src/contracts`. You can make necessary modifications to the contract code according to your needs and run the script `deploy-contracts` to automatically update the contract linked functionality to the new one.
+
+  ```bash
+  # With wallet.json keyfile present at root
+  yarn deploy-contracts
+  # With keyfile present at a custom path
+  yarn deploy-contracts /Users/arweave/Documents/keys/wallet.json
+  ```
 
 - **View Page:** A space to showcase assets and metadata, augmented with features like [Stamps](https://stamps.arweave.dev/#/en/main) (Arweave's version of 'likes') and [on-chain comments](https://specs.ar-io.dev/#/view/SYCrxZYzhP_L_iwmxS7niejyeJ_XhJtN4EArplCPHGQ).
 
