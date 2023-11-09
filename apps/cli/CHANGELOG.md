@@ -1,5 +1,11 @@
 # create-arweave-app
 
+## 0.1.4
+
+### Patch Changes
+
+- [#18](https://github.com/labscommunity/starterkit/pull/18) [`dcaa499`](https://github.com/labscommunity/starterkit/commit/dcaa499b1fef15e8695504b4f6d7a851870beff1) Thanks [@ropats16](https://github.com/ropats16)! - Updated README reflecting updated kit name
+
 ## 0.1.3
 
 ### Patch Changes
