@@ -1,5 +1,11 @@
 # create-arweave-app
 
+## 0.1.3
+
+### Patch Changes
+
+- [#16](https://github.com/labscommunity/starterkit/pull/16) [`a18cfb4`](https://github.com/labscommunity/starterkit/commit/a18cfb49df4325b7305e003a5770bcb7336d3521) Thanks [@pawanpaudel93](https://github.com/pawanpaudel93)! - Update README & contract deploy script
+
 ## 0.1.2
 
 ### Patch Changes
