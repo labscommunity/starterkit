@@ -93,7 +93,7 @@ bunx create-arweave-app@latest my-arweave-app --noGit --default
 
 ## Getting Started
 
-First, run the development:
+After creating a new project and installing the dependencies, run the development server:
 
 ```bash
 npm run dev
@@ -107,7 +107,7 @@ bun dev
 
 ## Preview
 
-After creating a new project and installing the dependencies, open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 **Landing Page:** A form that allows users to upload Atomic assets on Arweave, complete with various metadata configurations.
 
@@ -130,6 +130,15 @@ Building DApps from scratch can be a daunting task. From setting up the environm
 - **Landing Page:** A landing page featuring a form, typesafed with [Zod](https://zod.dev/) schemas. Users can upload images and add metadata, which is then posted to the Arweave network as an [atomic asset](https://cookbook.arweave.dev/concepts/atomic-tokens.html).
 
 - **Atomic Assets and Contracts:** Each asset is paired with an associated contract, enabling alterations to the metadata and transfer of ownership.
+
+  The created project is initialized with a contract which is located at `src/contracts`. You can make necessary modifications to the contract code according to your needs and run the script `deploy-contracts` to automatically update the contract linked functionality to the new one.
+
+  ```bash
+  # With wallet.json keyfile present at root
+  yarn deploy-contracts
+  # With keyfile present at a custom path
+  yarn deploy-contracts /Users/arweave/Documents/keys/wallet.json
+  ```
 
 - **View Page:** A space to showcase assets and metadata, augmented with features like [Stamps](https://stamps.arweave.dev/#/en/main) (Arweave's version of 'likes') and [on-chain comments](https://specs.ar-io.dev/#/view/SYCrxZYzhP_L_iwmxS7niejyeJ_XhJtN4EArplCPHGQ).
 

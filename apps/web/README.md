@@ -40,6 +40,15 @@ Building DApps from scratch can be a daunting task. From setting up the environm
 
 - **Atomic Assets and Contracts:** Each asset is paired with an associated contract, enabling alterations to the metadata and transfer of ownership.
 
+  The created project is initialized with a contract which is located at `src/contracts`. You can make necessary modifications to the contract code according to your needs and run the script `deploy-contracts` to automatically update the contract linked functionality to the new one.
+
+  ```bash
+  # With wallet.json keyfile present at root
+  yarn deploy-contracts
+  # With keyfile present at a custom path
+  yarn deploy-contracts /Users/arweave/Documents/keys/wallet.json
+  ```
+
 - **View Page:** A space to showcase assets and metadata, augmented with features like [Stamps](https://stamps.arweave.dev/#/en/main) (Arweave's version of 'likes') and [on-chain comments](https://specs.ar-io.dev/#/view/SYCrxZYzhP_L_iwmxS7niejyeJ_XhJtN4EArplCPHGQ).
 
 ## Leverage Modularity
